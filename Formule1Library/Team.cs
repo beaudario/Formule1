@@ -17,7 +17,7 @@ namespace Formule1Library
         [StringLength(250)]
         public string? WikiUrl { get; set; }
 
-        public string CountryID { get; set; }
+        public string? CountryID { get; set; }
         public Country Country { get; set; }
         
         /*public int ID { get; set; }

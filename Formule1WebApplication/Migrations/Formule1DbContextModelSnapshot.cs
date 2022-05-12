@@ -34,6 +34,9 @@ namespace Formule1WebApplication.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(2)");
 
+                    b.Property<int?>("GrandprixID")
+                        .HasColumnType("int");
+
                     b.Property<double?>("Latitude")
                         .HasColumnType("float");
 
@@ -52,6 +55,8 @@ namespace Formule1WebApplication.Migrations
                     b.HasKey("ID");
 
                     b.HasIndex("CountryID");
+
+                    b.HasIndex("GrandprixID");
 
                     b.ToTable("Circuits");
                 });
@@ -76,6 +81,55 @@ namespace Formule1WebApplication.Migrations
                     b.ToTable("Countries");
                 });
 
+            modelBuilder.Entity("Formule1Library.Data.Results", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<int?>("CircuitID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("DriverID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("GrandprixID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Racenumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Rounds")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Season")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TeamID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Time")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("CircuitID");
+
+                    b.HasIndex("DriverID");
+
+                    b.HasIndex("GrandprixID");
+
+                    b.HasIndex("TeamID");
+
+                    b.ToTable("Results");
+                });
+
             modelBuilder.Entity("Formule1Library.Driver", b =>
                 {
                     b.Property<int>("ID")
@@ -93,7 +147,6 @@ namespace Formule1WebApplication.Migrations
                         .HasColumnType("nvarchar(3)");
 
                     b.Property<string>("CountryID")
-                        .IsRequired()
                         .HasColumnType("nvarchar(2)");
 
                     b.Property<string>("Firstname")
@@ -128,11 +181,11 @@ namespace Formule1WebApplication.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
-                    b.Property<int>("CircuitID")
-                        .HasColumnType("int");
+                    b.Property<string>("CountryID")
+                        .HasColumnType("nvarchar(2)");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("DriverID")
                         .HasColumnType("int");
@@ -142,23 +195,9 @@ namespace Formule1WebApplication.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("RaceNumber")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Rounds")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Season")
-                        .HasColumnType("int");
-
-                    b.Property<string>("WinningTime")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.HasKey("ID");
 
-                    b.HasIndex("CircuitID");
+                    b.HasIndex("CountryID");
 
                     b.HasIndex("DriverID");
 
@@ -174,7 +213,6 @@ namespace Formule1WebApplication.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
                     b.Property<string>("CountryID")
-                        .IsRequired()
                         .HasColumnType("nvarchar(2)");
 
                     b.Property<string>("Description")
@@ -204,51 +242,71 @@ namespace Formule1WebApplication.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Formule1Library.Grandprix", "Grandprix")
+                        .WithMany("Circuits")
+                        .HasForeignKey("GrandprixID");
+
                     b.Navigation("Country");
+
+                    b.Navigation("Grandprix");
+                });
+
+            modelBuilder.Entity("Formule1Library.Data.Results", b =>
+                {
+                    b.HasOne("Formule1Library.Circuit", "Circuit")
+                        .WithMany()
+                        .HasForeignKey("CircuitID");
+
+                    b.HasOne("Formule1Library.Driver", "Driver")
+                        .WithMany()
+                        .HasForeignKey("DriverID");
+
+                    b.HasOne("Formule1Library.Grandprix", "Grandprix")
+                        .WithMany("Results")
+                        .HasForeignKey("GrandprixID");
+
+                    b.HasOne("Formule1Library.Team", "Team")
+                        .WithMany()
+                        .HasForeignKey("TeamID");
+
+                    b.Navigation("Circuit");
+
+                    b.Navigation("Driver");
+
+                    b.Navigation("Grandprix");
+
+                    b.Navigation("Team");
                 });
 
             modelBuilder.Entity("Formule1Library.Driver", b =>
                 {
                     b.HasOne("Formule1Library.Country", "Country")
                         .WithMany("Drivers")
-                        .HasForeignKey("CountryID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CountryID");
 
                     b.Navigation("Country");
                 });
 
             modelBuilder.Entity("Formule1Library.Grandprix", b =>
                 {
-                    b.HasOne("Formule1Library.Circuit", "Circuit")
+                    b.HasOne("Formule1Library.Country", "Country")
                         .WithMany("Grandprixes")
-                        .HasForeignKey("CircuitID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CountryID");
 
-                    b.HasOne("Formule1Library.Driver", "Driver")
+                    b.HasOne("Formule1Library.Driver", null)
                         .WithMany("Grandprixes")
                         .HasForeignKey("DriverID");
 
-                    b.Navigation("Circuit");
-
-                    b.Navigation("Driver");
+                    b.Navigation("Country");
                 });
 
             modelBuilder.Entity("Formule1Library.Team", b =>
                 {
                     b.HasOne("Formule1Library.Country", "Country")
                         .WithMany("Teams")
-                        .HasForeignKey("CountryID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CountryID");
 
                     b.Navigation("Country");
-                });
-
-            modelBuilder.Entity("Formule1Library.Circuit", b =>
-                {
-                    b.Navigation("Grandprixes");
                 });
 
             modelBuilder.Entity("Formule1Library.Country", b =>
@@ -257,12 +315,21 @@ namespace Formule1WebApplication.Migrations
 
                     b.Navigation("Drivers");
 
+                    b.Navigation("Grandprixes");
+
                     b.Navigation("Teams");
                 });
 
             modelBuilder.Entity("Formule1Library.Driver", b =>
                 {
                     b.Navigation("Grandprixes");
+                });
+
+            modelBuilder.Entity("Formule1Library.Grandprix", b =>
+                {
+                    b.Navigation("Circuits");
+
+                    b.Navigation("Results");
                 });
 #pragma warning restore 612, 618
         }

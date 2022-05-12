@@ -22,6 +22,8 @@ namespace Formule1Library
 
         public ICollection<Driver> Drivers { get; set; }
 
+        public ICollection<Grandprix> Grandprixes { get; set; }
+        
         /*[RegularExpression("[A-Z]{2}", ErrorMessage = "Landcode moet bestaan uit 2 hoofdletters")]
         [Column(TypeName = "char")]
         [Key]
