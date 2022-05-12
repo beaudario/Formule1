@@ -14,7 +14,7 @@ namespace Formule1Library
         public string CountryName { get; set; }
 
         [StringLength(100)] 
-        public string CountryFlag { get; set; } = string.Empty;
+        public string? CountryFlagUrl { get; set; } 
 
         public ICollection<Circuit> Circuits { get; set; }
 
