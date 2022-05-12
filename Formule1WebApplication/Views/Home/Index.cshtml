@@ -7,7 +7,7 @@
             <div class="card-body">
                 <h5 class="card-title">Seizoen @season.Year</h5>
                 <p class="card-text">Aantal gereden races: @season.RaceCount</p>
-                <button class="btn btn-primary" asp-controller="Season" asp-action="Index" asp-route-id="@season.Year">Info</button>
+                <button class="btn btn-primary" asp-controller="Home" asp-action="Details" asp-route-id="@season.Year">Info</button>
             </div>
         </div>
     }

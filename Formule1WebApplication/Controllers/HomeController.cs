@@ -19,6 +19,12 @@ public class HomeController : Controller
     {
         return View(await _db.Results.ToListAsync());
     }
+    
+    [Route("details/{id:int}")]
+    public async Task<IActionResult> Details(int id)
+    {
+        return View(await _db.Results.Where(r => r.Year == id).Include(s => s.Driver).ToListAsync());
+    }
 
     public IActionResult Privacy()
     {
