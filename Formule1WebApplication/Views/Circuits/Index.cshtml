@@ -4,11 +4,8 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Circuits</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -59,9 +56,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Country)
-            </td>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> 
             </td>
         </tr>
 }
