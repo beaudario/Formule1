@@ -1,21 +1,23 @@
 ﻿using System.Diagnostics;
+using Formule1Library.Data;
 using Microsoft.AspNetCore.Mvc;
 using Formule1WebApplication.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Formule1WebApplication.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    private readonly Formule1DbContext _db;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(Formule1DbContext db)
     {
-        _logger = logger;
+        _db = db;
     }
-
-    public IActionResult Index()
+    
+    public async Task<IActionResult> Index()
     {
-        return View();
+        return View(await _db.Results.ToListAsync());
     }
 
     public IActionResult Privacy()
