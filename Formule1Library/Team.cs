@@ -10,9 +10,11 @@ namespace Formule1Library
         [Required]
         [StringLength(100)]
         public string Name { get; set; }
-
-        public string Description { get; set; }
-
+        
+        public string? Description { get; set; }
+        
+        [DataType(DataType.Url)]
+        [StringLength(250)]
         public string? WikiUrl { get; set; }
 
         public string CountryID { get; set; }

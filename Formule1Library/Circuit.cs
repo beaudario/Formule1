@@ -15,12 +15,14 @@ namespace Formule1Library
         
         public double? Longitude { get; set; }
         
+        [DataType(DataType.Url)]
+        [StringLength(250)]
         public string? WikiUrl { get; set; }
 
         public string CountryID { get; set; }
         public Country Country { get; set; }
 
-        public int RaceID { get; set; }
+        public ICollection<Grandprix> Grandprixes { get; set; }
         
         /*public int ID { get; set; }
         
