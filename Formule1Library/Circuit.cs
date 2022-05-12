@@ -5,6 +5,8 @@ namespace Formule1Library
     public class Circuit
     {
         public int ID { get; set; }
+
+        public string? Image { get; set; } = string.Empty;
         
         [StringLength(50, ErrorMessage = "Maximumlengte van {0} is {1} tekens")]
         public string Name { get; set; } = string.Empty;
