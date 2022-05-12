@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Formule1Library", "Formule1Library\Formule1Library.csproj", "{094800F0-00FF-4C30-A89F-A035502F5DC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Formule1WebApplication", "Formule1WebApplication\Formule1WebApplication.csproj", "{DE05CC9D-139C-4134-9A07-84725B535644}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{094800F0-00FF-4C30-A89F-A035502F5DC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{094800F0-00FF-4C30-A89F-A035502F5DC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{094800F0-00FF-4C30-A89F-A035502F5DC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{094800F0-00FF-4C30-A89F-A035502F5DC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE05CC9D-139C-4134-9A07-84725B535644}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE05CC9D-139C-4134-9A07-84725B535644}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE05CC9D-139C-4134-9A07-84725B535644}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE05CC9D-139C-4134-9A07-84725B535644}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
