@@ -20,11 +20,26 @@ namespace Formule1WebApplication.Controllers
         }
 
         // GET: Drivers
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
-              return _context.Drivers != null ? 
-                          View(await _context.Drivers.ToListAsync()) :
-                          Problem("Entity set 'Formule1DbContext.Drivers'  is null.");
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            var drivers = from d in _context.Drivers
+                          select d;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                drivers = drivers.Where(d => d.Name.Contains(searchString));
+                                       
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    drivers = drivers.OrderByDescending(d => d.Name);
+                    break;
+                default:
+                    drivers = drivers.OrderBy(d => d.Name);
+                    break;
+            }
+            return View(await drivers.AsNoTracking().ToListAsync());
         }
 
         // GET: Drivers/Details/5
