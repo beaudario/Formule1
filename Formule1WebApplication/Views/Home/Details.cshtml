@@ -1,0 +1,10 @@
+﻿@model IEnumerable<Formule1Library.Result>
+
+@foreach (var race in Model)
+{
+    <h5>@Convert.ToDateTime(race.Date).ToShortDateString()</h5>
+    //<h5>@race.Grandprix.</h5>
+    //<h5>@race.Circuit.Name</h5>
+    //<h5>@race.Driver.Name</h5>
+    //<h5>@race.Rounds</h5>
+}
