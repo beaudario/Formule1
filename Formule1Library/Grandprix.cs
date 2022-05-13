@@ -24,7 +24,7 @@ namespace Formule1Library
 
         public ICollection<Circuit> Circuits { get; set; }
 
-        public ICollection<Results> Results { get; set; }
+        public ICollection<Result> Results { get; set; }
         
         /*public int ID { get; set; }
         

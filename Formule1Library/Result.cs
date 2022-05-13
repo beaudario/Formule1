@@ -2,7 +2,7 @@
 
 namespace Formule1Library.Data;
 
-public class Results
+public class Result
 {
     [Key]
     public int ID { get; set; }

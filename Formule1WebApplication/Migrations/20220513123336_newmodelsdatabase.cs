@@ -28,12 +28,10 @@ namespace Formule1WebApplication.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Code = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: false),
-                    Firstname = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
-                    Lastname = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Fullname = table.Column<string>(type: "nvarchar(75)", maxLength: 75, nullable: false),
                     Birthdate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Geslacht = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
-                    WikiUrl = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    Gender = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    ImageUrl = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
                     CountryID = table.Column<string>(type: "nvarchar(2)", nullable: true)
                 },
                 constraints: table =>
@@ -41,6 +39,26 @@ namespace Formule1WebApplication.Migrations
                     table.PrimaryKey("PK_Drivers", x => x.ID);
                     table.ForeignKey(
                         name: "FK_Drivers_Countries_CountryID",
+                        column: x => x.CountryID,
+                        principalTable: "Countries",
+                        principalColumn: "CountryCode");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Grandprixes",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CountryID = table.Column<string>(type: "nvarchar(2)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Grandprixes", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Grandprixes_Countries_CountryID",
                         column: x => x.CountryID,
                         principalTable: "Countries",
                         principalColumn: "CountryCode");
@@ -65,32 +83,6 @@ namespace Formule1WebApplication.Migrations
                         column: x => x.CountryID,
                         principalTable: "Countries",
                         principalColumn: "CountryCode");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Grandprixes",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CountryID = table.Column<string>(type: "nvarchar(2)", nullable: true),
-                    DriverID = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Grandprixes", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Grandprixes_Countries_CountryID",
-                        column: x => x.CountryID,
-                        principalTable: "Countries",
-                        principalColumn: "CountryCode");
-                    table.ForeignKey(
-                        name: "FK_Grandprixes_Drivers_DriverID",
-                        column: x => x.DriverID,
-                        principalTable: "Drivers",
-                        principalColumn: "ID");
                 });
 
             migrationBuilder.CreateTable(
@@ -184,11 +176,6 @@ namespace Formule1WebApplication.Migrations
                 column: "CountryID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Grandprixes_DriverID",
-                table: "Grandprixes",
-                column: "DriverID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Results_CircuitID",
                 table: "Results",
                 column: "CircuitID");
@@ -223,13 +210,13 @@ namespace Formule1WebApplication.Migrations
                 name: "Circuits");
 
             migrationBuilder.DropTable(
+                name: "Drivers");
+
+            migrationBuilder.DropTable(
                 name: "Teams");
 
             migrationBuilder.DropTable(
                 name: "Grandprixes");
-
-            migrationBuilder.DropTable(
-                name: "Drivers");
 
             migrationBuilder.DropTable(
                 name: "Countries");

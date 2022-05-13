@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Formule1Library.Data;
 
 namespace Formule1Library
 {
@@ -9,32 +10,25 @@ namespace Formule1Library
         public int ID { get; set; }
 
         [Required]
-        [StringLength(3)]
-        public string Code { get; set; }
-
-        [Required]
-        [StringLength(25)]
-        public string Firstname { get; set; }
-
-        [StringLength(50)]
-        public string? Lastname { get; set; }
+        [StringLength(75)]
+        public string Fullname { get; set; }
 
         [DataType(DataType.Date)]
         public DateTime? Birthdate { get; set; }
 
         [StringLength(10)]
-        public string? Geslacht { get; set; }
+        public string? Gender { get; set; }
 
         [DataType(DataType.Url)]
         [StringLength(250)]
-        public string? WikiUrl { get; set; }
+        public string? ImageUrl { get; set; }
 
         public string? CountryID { get; set; }
         public Country Country { get; set; }
 
-        public ICollection<Grandprix> Grandprixes { get; set; }
+        public ICollection<Result> Results { get; set; }
 
-        
+
         /*public int ID { get; set; }
         
         [StringLength(50, ErrorMessage = "Maximumlengte voor {0} is {1} tekens")]

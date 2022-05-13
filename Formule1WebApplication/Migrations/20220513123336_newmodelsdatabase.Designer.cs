@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Formule1WebApplication.Migrations
 {
     [DbContext(typeof(Formule1DbContext))]
-    [Migration("20220512215917_newmodelsdatabase")]
+    [Migration("20220513123336_newmodelsdatabase")]
     partial class newmodelsdatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -83,7 +83,7 @@ namespace Formule1WebApplication.Migrations
                     b.ToTable("Countries");
                 });
 
-            modelBuilder.Entity("Formule1Library.Data.Results", b =>
+            modelBuilder.Entity("Formule1Library.Data.Result", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -143,28 +143,19 @@ namespace Formule1WebApplication.Migrations
                     b.Property<DateTime?>("Birthdate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasMaxLength(3)
-                        .HasColumnType("nvarchar(3)");
-
                     b.Property<string>("CountryID")
                         .HasColumnType("nvarchar(2)");
 
-                    b.Property<string>("Firstname")
+                    b.Property<string>("Fullname")
                         .IsRequired()
-                        .HasMaxLength(25)
-                        .HasColumnType("nvarchar(25)");
+                        .HasMaxLength(75)
+                        .HasColumnType("nvarchar(75)");
 
-                    b.Property<string>("Geslacht")
+                    b.Property<string>("Gender")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<string>("Lastname")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("WikiUrl")
+                    b.Property<string>("ImageUrl")
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
@@ -189,9 +180,6 @@ namespace Formule1WebApplication.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("DriverID")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -200,8 +188,6 @@ namespace Formule1WebApplication.Migrations
                     b.HasKey("ID");
 
                     b.HasIndex("CountryID");
-
-                    b.HasIndex("DriverID");
 
                     b.ToTable("Grandprixes");
                 });
@@ -253,14 +239,14 @@ namespace Formule1WebApplication.Migrations
                     b.Navigation("Grandprix");
                 });
 
-            modelBuilder.Entity("Formule1Library.Data.Results", b =>
+            modelBuilder.Entity("Formule1Library.Data.Result", b =>
                 {
                     b.HasOne("Formule1Library.Circuit", "Circuit")
                         .WithMany()
                         .HasForeignKey("CircuitID");
 
                     b.HasOne("Formule1Library.Driver", "Driver")
-                        .WithMany()
+                        .WithMany("Results")
                         .HasForeignKey("DriverID");
 
                     b.HasOne("Formule1Library.Grandprix", "Grandprix")
@@ -295,10 +281,6 @@ namespace Formule1WebApplication.Migrations
                         .WithMany("Grandprixes")
                         .HasForeignKey("CountryID");
 
-                    b.HasOne("Formule1Library.Driver", null)
-                        .WithMany("Grandprixes")
-                        .HasForeignKey("DriverID");
-
                     b.Navigation("Country");
                 });
 
@@ -324,7 +306,7 @@ namespace Formule1WebApplication.Migrations
 
             modelBuilder.Entity("Formule1Library.Driver", b =>
                 {
-                    b.Navigation("Grandprixes");
+                    b.Navigation("Results");
                 });
 
             modelBuilder.Entity("Formule1Library.Grandprix", b =>
