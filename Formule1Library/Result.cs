@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Formule1Library.Data;
 
-namespace Formule1Library.Data;
+namespace Formule1Library;
 
 public class Result
 {

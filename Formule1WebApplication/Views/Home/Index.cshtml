@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Formule1Library.Result>
 
 <form method="post">
-    @foreach (var season in Model.GroupBy(s => s.Year, (key, items) => new {Year = key, RaceCount = items.Count()}).OrderByDescending(s => s.Year))
+    @foreach (var season in Model.GroupBy(s => s.Season, (key, items) => new {Year = key, RaceCount = items.Count()}).OrderByDescending(s => s.Year))
     {
         <div class="card w-50 m-2">
             <div class="card-body">
