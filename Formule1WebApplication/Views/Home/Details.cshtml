@@ -11,7 +11,7 @@
             <p class="card-text">Datum: @Convert.ToDateTime(result.Date).ToShortDateString()</p>
             <p class="card-text">Circuit: <a asp-controller="" asp-action="">@result.Circuit.Name</a></p>
             <p class="card-text">
-                Winnende coureur: <a asp-controller="" asp-action="">@result.Driver.Fullname</a> &nbsp
+                Winnende coureur: <a asp-controller="Driver" asp-action="Details" asp-route-id="@result.Driver.ID">@result.Driver.Fullname</a> &nbsp
                 <img width="5%" src="@result.Driver.Country.FlagUrl"/>
             </p>
             <p class="card-text">
