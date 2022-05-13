@@ -2,11 +2,18 @@
 
 @foreach (var result in Model)
 {
-    <h5>@Convert.ToDateTime(result.Date).ToShortDateString()</h5>
-    <h5>@result.Grandprix.Name</h5>
-    <h5>@result.Circuit.Name</h5>
-    <h5>@result.Driver.Fullname</h5>
-    <h5>@result.Rounds</h5>
-    <br/>                  
-    <br/>                  
+    <div class="card w-50 m-2">
+        <div class="card-body">
+            <h5 class="card-title">
+                @result.Grandprix.Name &nbsp;
+                <img width="7%" src="@result.Circuit.Country.FlagUrl"/>
+            </h5>
+            <p class="card-text">Datum: @Convert.ToDateTime(result.Date).ToShortDateString()</p>
+            <p class="card-text">Winnende coureur: @result.Driver.Fullname</p>
+            <p class="card-text">Winnend constructeursteam: @result.Team.Name</p>
+            <p class="card-text">Circuit: @result.Circuit.Name</p>
+            <p class="card-text">Rondes: @result.Rounds</p>
+            <p class="card-text"></p>
+        </div>
+    </div>
 }
