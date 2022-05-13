@@ -26,10 +26,12 @@ public class HomeController : Controller
         return View(await _db.Results
             .Where(r => r.Season == id)
             .Include(r => r.Driver)
+            .Include(r => r.Driver.Country)
             .Include(r => r.Team)
+            .Include(r => r.Team.Country)
             .Include(r => r.Circuit)
-            .Include(r => r.Grandprix)
             .Include(r => r.Circuit.Country)
+            .Include(r => r.Grandprix)
             .ToListAsync());
     }
 

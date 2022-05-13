@@ -3,7 +3,7 @@
 <form method="post">
     @foreach (var season in Model.GroupBy(s => s.Season, (key, items) => new {Year = key, RaceCount = items.Count()}).OrderByDescending(s => s.Year))
     {
-        <div class="card w-50 m-2">
+        <div class="card w-50 m-2" style="background-color: #e1e1e1">
             <div class="card-body">
                 <h5 class="card-title">Seizoen @season.Year</h5>
                 <p class="card-text">Aantal gereden races: @season.RaceCount</p>

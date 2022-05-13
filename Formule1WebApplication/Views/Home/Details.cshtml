@@ -2,18 +2,24 @@
 
 @foreach (var result in Model)
 {
-    <div class="card w-50 m-2">
+    <div class="card w-50 m-2" style="background-color: #e1e1e1">
         <div class="card-body">
             <h5 class="card-title">
-                @result.Grandprix.Name &nbsp;
+                @result.Grandprix.Name &nbsp
                 <img width="7%" src="@result.Circuit.Country.FlagUrl"/>
             </h5>
             <p class="card-text">Datum: @Convert.ToDateTime(result.Date).ToShortDateString()</p>
-            <p class="card-text">Winnende coureur: @result.Driver.Fullname</p>
-            <p class="card-text">Winnend constructeursteam: @result.Team.Name</p>
             <p class="card-text">Circuit: @result.Circuit.Name</p>
+            <p class="card-text">
+                Winnende coureur: @result.Driver.Fullname &nbsp
+                <img width="5%" src="@result.Driver.Country.FlagUrl"/>
+            </p>
+            <p class="card-text">
+                Winnend constructeursteam: @result.Team.Name &nbsp
+                <img width="5%" src="@result.Team.Country.FlagUrl"/>
+            </p>
             <p class="card-text">Rondes: @result.Rounds</p>
-            <p class="card-text"></p>
+            <p class="card-text">Raceduur: @result.Time (moet nog veranderd worden in snelste tijd)</p>
         </div>
     </div>
 }
