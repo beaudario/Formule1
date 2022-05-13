@@ -1,31 +1,35 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Formule1Library
+namespace Formule1Library.Data;
+
+public class Result
 {
-    public class Result
-    {
-        public int ID { get; set; }
-        
-        [Display(Name = "Jaar")]
-        public int Year { get; set; }
-        
-        [Display(Name = "#")]
-        public byte Racenumber { get; set; }
-        
-        [Display(Name = "Datum")]
-        public DateTime? Date { get; set; }
-        
-        [Display(Name = "Rondes")]
-        public byte Rounds { get; set; }
-        
-        [Display(Name = "Tijd")]
-        public string Time { get; set; } = string.Empty;
-        
-        public Driver Driver { get; set; }
-        public Grandprix Grandprix { get; set; }
-        public Circuit Circuit { get; set; }
-        public Team Team { get; set; }
+    [Key]
+    public int ID { get; set; }
 
+    [Required]
+    public int Season { get; set; }
 
-    }
+    [Required]
+    public int Racenumber { get; set; }
+
+    [Required]
+    [DataType(DataType.Date)]
+    public DateTime Date { get; set; }
+
+    public int Rounds { get; set; }
+
+    public string Time { get; set; }
+
+    public int? DriverID { get; set; }
+    public Driver Driver { get; set; }
+
+    public int? CircuitID { get; set; }
+    public Circuit Circuit { get; set; }
+
+    public int? TeamID { get; set; }
+    public Team Team { get; set; }
+
+    public int? GrandprixID { get; set; }
+    public Grandprix Grandprix { get; set; }
 }

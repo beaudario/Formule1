@@ -5,7 +5,27 @@ namespace Formule1Library
 {
     public class Country
     {
-        [RegularExpression("[A-Z]{2}", ErrorMessage = "Landcode moet bestaan uit 2 hoofdletters")]
+        [Key]
+        [StringLength(2)]
+        public string ID { get; set; }
+
+        [Required]
+        [StringLength(100)]
+        public string Name { get; set; }
+
+        [DataType(DataType.Url)]
+        [StringLength(250)] 
+        public string? FlagUrl { get; set; } 
+
+        public ICollection<Circuit> Circuits { get; set; }
+
+        public ICollection<Team> Teams { get; set; }
+
+        public ICollection<Driver> Drivers { get; set; }
+
+        public ICollection<Grandprix> Grandprixes { get; set; }
+        
+        /*[RegularExpression("[A-Z]{2}", ErrorMessage = "Landcode moet bestaan uit 2 hoofdletters")]
         [Column(TypeName = "char")]
         [Key]
         [Display(Name = "Landcode")]
@@ -32,6 +52,6 @@ namespace Formule1Library
         
         public IEnumerable<Driver> Drivers { get; set; } = Enumerable.Empty<Driver>();
         public IEnumerable<Team> Teams { get; set; } = Enumerable.Empty<Team>();
-        public IEnumerable<Circuit> Circuits { get; set; } = Enumerable.Empty<Circuit>();
+        public IEnumerable<Circuit> Circuits { get; set; } = Enumerable.Empty<Circuit>();*/
     }
 }
