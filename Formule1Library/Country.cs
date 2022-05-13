@@ -7,14 +7,15 @@ namespace Formule1Library
     {
         [Key]
         [StringLength(2)]
-        public string CountryCode { get; set; }
+        public string ID { get; set; }
 
         [Required]
         [StringLength(100)]
-        public string CountryName { get; set; }
+        public string Name { get; set; }
 
-        [StringLength(100)] 
-        public string? CountryFlagUrl { get; set; } 
+        [DataType(DataType.Url)]
+        [StringLength(250)] 
+        public string? FlagUrl { get; set; } 
 
         public ICollection<Circuit> Circuits { get; set; }
 

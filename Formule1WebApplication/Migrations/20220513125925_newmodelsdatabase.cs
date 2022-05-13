@@ -13,13 +13,35 @@ namespace Formule1WebApplication.Migrations
                 name: "Countries",
                 columns: table => new
                 {
-                    CountryCode = table.Column<string>(type: "nvarchar(2)", maxLength: 2, nullable: false),
-                    CountryName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    CountryFlagUrl = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
+                    ID = table.Column<string>(type: "nvarchar(2)", maxLength: 2, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    FlagUrl = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Countries", x => x.CountryCode);
+                    table.PrimaryKey("PK_Countries", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Circuits",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Latitude = table.Column<double>(type: "float", nullable: true),
+                    Longitude = table.Column<double>(type: "float", nullable: true),
+                    WikiUrl = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    CountryID = table.Column<string>(type: "nvarchar(2)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Circuits", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Circuits_Countries_CountryID",
+                        column: x => x.CountryID,
+                        principalTable: "Countries",
+                        principalColumn: "ID");
                 });
 
             migrationBuilder.CreateTable(
@@ -41,7 +63,7 @@ namespace Formule1WebApplication.Migrations
                         name: "FK_Drivers_Countries_CountryID",
                         column: x => x.CountryID,
                         principalTable: "Countries",
-                        principalColumn: "CountryCode");
+                        principalColumn: "ID");
                 });
 
             migrationBuilder.CreateTable(
@@ -61,7 +83,7 @@ namespace Formule1WebApplication.Migrations
                         name: "FK_Grandprixes_Countries_CountryID",
                         column: x => x.CountryID,
                         principalTable: "Countries",
-                        principalColumn: "CountryCode");
+                        principalColumn: "ID");
                 });
 
             migrationBuilder.CreateTable(
@@ -82,35 +104,6 @@ namespace Formule1WebApplication.Migrations
                         name: "FK_Teams_Countries_CountryID",
                         column: x => x.CountryID,
                         principalTable: "Countries",
-                        principalColumn: "CountryCode");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Circuits",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Latitude = table.Column<double>(type: "float", nullable: true),
-                    Longitude = table.Column<double>(type: "float", nullable: true),
-                    WikiUrl = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
-                    CountryID = table.Column<string>(type: "nvarchar(2)", nullable: false),
-                    GrandprixID = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Circuits", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Circuits_Countries_CountryID",
-                        column: x => x.CountryID,
-                        principalTable: "Countries",
-                        principalColumn: "CountryCode",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Circuits_Grandprixes_GrandprixID",
-                        column: x => x.GrandprixID,
-                        principalTable: "Grandprixes",
                         principalColumn: "ID");
                 });
 
@@ -161,11 +154,6 @@ namespace Formule1WebApplication.Migrations
                 column: "CountryID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Circuits_GrandprixID",
-                table: "Circuits",
-                column: "GrandprixID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Drivers_CountryID",
                 table: "Drivers",
                 column: "CountryID");
@@ -213,10 +201,10 @@ namespace Formule1WebApplication.Migrations
                 name: "Drivers");
 
             migrationBuilder.DropTable(
-                name: "Teams");
+                name: "Grandprixes");
 
             migrationBuilder.DropTable(
-                name: "Grandprixes");
+                name: "Teams");
 
             migrationBuilder.DropTable(
                 name: "Countries");

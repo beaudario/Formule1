@@ -22,8 +22,6 @@ namespace Formule1Library
         public string? CountryID { get; set; }
         public Country Country { get; set; }
 
-        public ICollection<Circuit> Circuits { get; set; }
-
         public ICollection<Result> Results { get; set; }
         
         /*public int ID { get; set; }

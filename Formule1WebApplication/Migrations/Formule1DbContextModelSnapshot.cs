@@ -31,11 +31,7 @@ namespace Formule1WebApplication.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
                     b.Property<string>("CountryID")
-                        .IsRequired()
                         .HasColumnType("nvarchar(2)");
-
-                    b.Property<int?>("GrandprixID")
-                        .HasColumnType("int");
 
                     b.Property<double?>("Latitude")
                         .HasColumnType("float");
@@ -56,27 +52,25 @@ namespace Formule1WebApplication.Migrations
 
                     b.HasIndex("CountryID");
 
-                    b.HasIndex("GrandprixID");
-
                     b.ToTable("Circuits");
                 });
 
             modelBuilder.Entity("Formule1Library.Country", b =>
                 {
-                    b.Property<string>("CountryCode")
+                    b.Property<string>("ID")
                         .HasMaxLength(2)
                         .HasColumnType("nvarchar(2)");
 
-                    b.Property<string>("CountryFlagUrl")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                    b.Property<string>("FlagUrl")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
-                    b.Property<string>("CountryName")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("CountryCode");
+                    b.HasKey("ID");
 
                     b.ToTable("Countries");
                 });
@@ -224,17 +218,9 @@ namespace Formule1WebApplication.Migrations
                 {
                     b.HasOne("Formule1Library.Country", "Country")
                         .WithMany("Circuits")
-                        .HasForeignKey("CountryID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Formule1Library.Grandprix", "Grandprix")
-                        .WithMany("Circuits")
-                        .HasForeignKey("GrandprixID");
+                        .HasForeignKey("CountryID");
 
                     b.Navigation("Country");
-
-                    b.Navigation("Grandprix");
                 });
 
             modelBuilder.Entity("Formule1Library.Data.Result", b =>
@@ -309,8 +295,6 @@ namespace Formule1WebApplication.Migrations
 
             modelBuilder.Entity("Formule1Library.Grandprix", b =>
                 {
-                    b.Navigation("Circuits");
-
                     b.Navigation("Results");
                 });
 #pragma warning restore 612, 618

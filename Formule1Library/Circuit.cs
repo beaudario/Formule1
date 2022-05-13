@@ -22,9 +22,6 @@ namespace Formule1Library
         public string? CountryID { get; set; }
         public Country Country { get; set; }
 
-        public int? GrandprixID { get; set; }
-        public Grandprix Grandprix { get; set; }
-        
         /*public int ID { get; set; }
         
         [StringLength(50, ErrorMessage = "Maximumlengte van {0} is {1} tekens")]
