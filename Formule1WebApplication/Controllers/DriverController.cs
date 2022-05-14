@@ -23,6 +23,7 @@ public class DriverController : Controller
     {
         return View(await _db.Drivers
             .Include(d => d.Country)
+            .Include(d => d.Teams)
             .Include(d => d.Results)
             .FirstAsync(d => d.ID == id));
     }

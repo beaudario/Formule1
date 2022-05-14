@@ -1,4 +1,7 @@
 ﻿@model Formule1Library.Driver
+@{
+    var lastRace = Model.Results.OrderByDescending(r => r.Date).Last();
+}
 
 <div class="card w-100 m-2" style="background-color: #e1e1e1">
     <div class="card-body">
@@ -7,9 +10,19 @@
         <p>Nationaliteit: @Model.Country.Name</p>
         <p>Geboortedatum: @Convert.ToDateTime(@Model.Birthdate).ToShortDateString()</p>
         <p>Wikipediapagina: @Model.WikiUrl</p>
-        @foreach (var raceWin in Model.Results.GroupBy(r => r.DriverID, (key, items) => new {Year = key, Count = items.Count()}).OrderByDescending(s => s.Year))
+        @foreach (var raceWin in Model.Results.GroupBy(r => r.DriverID, (key, items) => new {Year = key, Count = items.Count()}).OrderBy(s => s.Year))
         {
             <p>Aantal overwinningen: @raceWin.Count</p>
         }
+        <p>@lastRace.Date</p>
+        <p>@lastRace.Grandprix.Name</p>
+        <br/>
+        <h5>Teams</h5>
+        <ul>
+            @foreach (var team in Model.Teams)
+            {
+                <li>@team.Name</li>
+            }
+        </ul>
     </div>
 </div>
