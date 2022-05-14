@@ -40,6 +40,9 @@ namespace Formule1Library
         public Country Country { get; set; }
 
         public ICollection<Result> Results { get; set; }
+        
+        public ICollection<Team> Teams { get; set; }
+
 
         #endregion
     }
