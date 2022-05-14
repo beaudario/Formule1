@@ -9,13 +9,13 @@
                 <img width="7%" src="@result.Circuit.Country.FlagUrl"/>
             </h5>
             <p class="card-text">Datum: @Convert.ToDateTime(result.Date).ToShortDateString()</p>
-            <p class="card-text">Circuit: <a asp-controller="" asp-action="">@result.Circuit.Name</a></p>
+            <p class="card-text">Circuit: <a asp-controller="Circuit" asp-action="Details">@result.CircuitID</a></p>
             <p class="card-text">
-                Winnende coureur: <a asp-controller="Driver" asp-action="Details" asp-route-id="@result.Driver.ID">@result.Driver.Fullname</a> &nbsp
+                Winnende coureur: <a asp-controller="Driver" asp-action="Details" asp-route-id="@result.DriverID">@result.Driver.Fullname</a> &nbsp
                 <img width="5%" src="@result.Driver.Country.FlagUrl"/>
             </p>
             <p class="card-text">
-                Winnend constructeursteam: <a asp-controller="" asp-action="">@result.Team.Name</a> &nbsp
+                Winnend constructeursteam: <a asp-controller="" asp-action="">@result.TeamID</a> &nbsp
                 <img width="5%" src="@result.Team.Country.FlagUrl"/>
             </p>
             <p class="card-text">Rondes: @result.Rounds</p>
