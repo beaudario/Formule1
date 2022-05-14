@@ -1,5 +1,15 @@
 ﻿@model Formule1Library.Driver
 
-@Html.DisplayFor(x => x.Fullname)
-@Html.DisplayFor(x => x.Gender)
-@Html.DisplayFor(x => x.Birthdate)
+<div class="card w-50 m-2" style="background-color: #e1e1e1">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Fullname</h5>
+        <img style="padding-bottom: 10px; padding-bottom: 10px" src="@Model.ImageUrl"/>
+        <p>Nationaliteit: @Model.Country.Name</p>
+        <p>Geboortedatum: @Convert.ToDateTime(@Model.Birthdate).ToShortDateString()</p>
+        <p>Wikipediapagina: @Model.WikiUrl</p>
+        @foreach (var raceWin in Model.Results.GroupBy(s => s.DriverID, (key, items) => new {Year = key, Count = items.Count()}).OrderByDescending(s => s.Year))
+        {
+            <p>Aantal overwinningen: @raceWin.Count</p>
+        }
+    </div>
+</div>

@@ -21,6 +21,9 @@ public class DriverController : Controller
     [Route("coureur/details/{id:int}")]
     public async Task<IActionResult> Details(int id)
     {
-        return View(await _db.Drivers.FirstAsync(d => d.ID == id));
+        return View(await _db.Drivers
+            .Include(d => d.Country)
+            .Include(d => d.Results)
+            .FirstAsync(d => d.ID == id));
     }
 }
