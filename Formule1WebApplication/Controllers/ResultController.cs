@@ -20,7 +20,7 @@ public class ResultController : Controller
         return View(await _db.Results.ToListAsync());
     }
     
-    [Route("season/details/{id:int}")]
+    [Route("seasons/details/{id:int}")]
     public async Task<IActionResult> Details(int id)
     {
         return View(await _db.Results

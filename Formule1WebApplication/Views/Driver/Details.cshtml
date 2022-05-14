@@ -7,7 +7,7 @@
         <p>Nationaliteit: @Model.Country.Name</p>
         <p>Geboortedatum: @Convert.ToDateTime(@Model.Birthdate).ToShortDateString()</p>
         <p>Wikipediapagina: @Model.WikiUrl</p>
-        @foreach (var raceWin in Model.Results.GroupBy(s => s.DriverID, (key, items) => new {Year = key, Count = items.Count()}).OrderByDescending(s => s.Year))
+        @foreach (var raceWin in Model.Results.GroupBy(r => r.DriverID, (key, items) => new {Year = key, Count = items.Count()}).OrderByDescending(s => s.Year))
         {
             <p>Aantal overwinningen: @raceWin.Count</p>
         }

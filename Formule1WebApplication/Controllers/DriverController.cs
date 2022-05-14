@@ -18,7 +18,7 @@ public class DriverController : Controller
         return View(await _db.Drivers.ToListAsync());
     }
 
-    [Route("coureur/details/{id:int}")]
+    [Route("coureurs/details/{id:int}")]
     public async Task<IActionResult> Details(int id)
     {
         return View(await _db.Drivers

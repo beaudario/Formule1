@@ -15,4 +15,10 @@ public class CircuitController : Controller
     {
         return View();
     }
+    
+    [Route("circuits/details/{id:int}")]
+    public IActionResult Details(int id)
+    {
+        return View();
+    }
 }
