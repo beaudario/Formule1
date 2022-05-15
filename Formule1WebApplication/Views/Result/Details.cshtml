@@ -1,21 +1,25 @@
-﻿@model IEnumerable<Formule1Library.Result>
+﻿@using Formule1Library
+@model IEnumerable<Formule1Library.Result>
+
+<h2>Resultaten Seizoen @Model.Select(r => r.Season).First()</h2>
+<br/>
 
 @foreach (var result in Model)
 {
     <div class="card w-50 m-2" style="background-color: #e1e1e1">
         <div class="card-body">
             <h5 class="card-title">
-                <a asp-controller="" asp-action="">@result.Grandprix.Name</a> &nbsp
+                <a class="link-dark" asp-controller="" asp-action="">@result.Grandprix.Name</a> &nbsp
                 <img width="7%" src="@result.Circuit.Country.FlagUrl"/>
             </h5>
             <p class="card-text">Datum: @Convert.ToDateTime(result.Date).ToShortDateString()</p>
-            <p class="card-text">Circuit: <a asp-controller="Circuit" asp-action="Details">@result.CircuitID</a></p>
+            <p class="card-text">Circuit: <a class="link-dark" asp-controller="Circuit" asp-action="Details" asp-route-id="@result.CircuitID">@result.Circuit.Name</a></p>
             <p class="card-text">
-                Winnende coureur: <a asp-controller="Driver" asp-action="Details" asp-route-id="@result.DriverID">@result.Driver.Fullname</a> &nbsp
+                Winnende coureur: <a class="link-dark" asp-controller="Driver" asp-action="Details" asp-route-id="@result.DriverID">@result.Driver.Fullname</a> &nbsp
                 <img width="5%" src="@result.Driver.Country.FlagUrl"/>
             </p>
             <p class="card-text">
-                Winnend constructeursteam: <a asp-controller="" asp-action="">@result.TeamID</a> &nbsp
+                Winnend constructeursteam: <a class="link-dark" asp-controller="" asp-action="">@result.Team.Name</a> &nbsp
                 <img width="5%" src="@result.Team.Country.FlagUrl"/>
             </p>
             <p class="card-text">Rondes: @result.Rounds</p>

@@ -1,5 +1,6 @@
 ﻿using Formule1Library.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Formule1WebApplication.Controllers;
 public class CircuitController : Controller
@@ -11,14 +12,17 @@ public class CircuitController : Controller
         _db = db;
     }
     
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
         return View();
     }
     
     [Route("circuits/details/{id:int}")]
-    public IActionResult Details(int id)
+    public async Task<IActionResult> Details(int? id)
     {
-        return View();
+        return View(await _db.Circuits
+            .Include(c => c.Country)
+            .Where(c => c.ID == id)
+            .FirstAsync());
     }
 }
