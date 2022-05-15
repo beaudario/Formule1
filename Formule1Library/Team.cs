@@ -27,6 +27,8 @@ namespace Formule1Library
         public Country Country { get; set; }
 
         public ICollection<Result> Results { get; set; }
+        
+        public ICollection<Driver> Drivers { get; set; }
 
         #endregion
     }
