@@ -5,33 +5,46 @@ namespace Formule1Library
 {
     public class Country
     {
-        [RegularExpression("[A-Z]{2}", ErrorMessage = "Landcode moet bestaan uit 2 hoofdletters")]
-        [Column(TypeName = "char")]
+        #region Properties
+
         [Key]
-        [Display(Name = "Landcode")]
+        [RegularExpression("[A-Z]{2}", ErrorMessage = "Landcode moet bestaan uit 2 hoofdletters")]
         [StringLength(2)]
-        public string CountryCode { get; set; } = string.Empty;
-        
-        [Required]
-        [Display(Name = "Land")]
-        [StringLength(100, ErrorMessage = "Maximumlengte voor {0} is {1} tekens")]
-        public string CountryName { get; set; } = string.Empty;
-        
+        public string ID { get; set; }
+
         [RegularExpression("[A-Z]{3}", ErrorMessage = "Landcode moet bestaan uit 3 hoofdletters")]
-        [Column(TypeName = "char")]
-        [Display(Name = "Landcode3")]
         [StringLength(3)]
-        public string? Code3 { get; set; } = string.Empty;
-        
-        [StringLength(5, ErrorMessage = "Maximumlengte voor {0} is {1} tekens")]
-        public string? CountryNumber { get; set; } = string.Empty;  
-        
+        public string? Code3 { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "Maximumlengte voor {0} is {1} tekens")]
+        public string Name { get; set; }
+
+        [DataType(DataType.Url)]
         [StringLength(250, ErrorMessage = "Maximumlengte voor {0} is {1} tekens")]
+<<<<<<< HEAD
         [Display(Name = "Vlag")]
         public string? FlagUrl { get; set; } = string.Empty;
         
         public ICollection<Driver>? Drivers { get; set; } 
         public ICollection<Team>? Teams { get; set; } 
         public ICollection<Circuit>? Circuits { get; set; }
+=======
+        public string? FlagUrl { get; set; }
+
+        #endregion
+
+        #region Relation properties
+
+        public ICollection<Circuit> Circuits { get; set; }
+
+        public ICollection<Team> Teams { get; set; }
+
+        public ICollection<Driver> Drivers { get; set; }
+
+        public ICollection<Grandprix> Grandprixes { get; set; }
+
+        #endregion
+>>>>>>> master
     }
 }

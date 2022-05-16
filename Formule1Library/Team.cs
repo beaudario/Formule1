@@ -4,20 +4,38 @@ namespace Formule1Library
 {
     public class Team
     {
-        public int ID { get; set; }
-        
+        #region Properties
+
+        [Key] public int ID { get; set; }
+
+        [Required]
+        [Display(Name = "Naam")]
         [StringLength(50, ErrorMessage = "Maximumlengte voor {0} is {1} tekens")]
-        public string Name { get; set; } = string.Empty;
-        
-        public string? Description { get; set; } = string.Empty;
-        
+        public string Name { get; set; }
+
+        public string? Description { get; set; }
+
         [DataType(DataType.Url)]
         [StringLength(250, ErrorMessage = "Maximumlengte voor {0} is {1} tekens")]
-        [Display(Name = "Wiki pagina")]
-        public string? Wiki { get; set; } = string.Empty;
+        public string? WikiUrl { get; set; }
+
+        #endregion
+
+        #region Relation properties
+
+        public string? CountryID { get; set; }
+        public Country Country { get; set; }
+
+        public ICollection<Result> Results { get; set; }
         
+<<<<<<< HEAD
         public Country? Country { get; set; }
         
         public ICollection<Result>? Races { get; set; }
+=======
+        public ICollection<Driver> Drivers { get; set; }
+
+        #endregion
+>>>>>>> master
     }
 }
