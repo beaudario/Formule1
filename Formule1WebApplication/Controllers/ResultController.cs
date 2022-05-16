@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Formule1WebApplication.Controllers;
 
-public class HomeController : Controller
+public class ResultController : Controller
 {
     private readonly Formule1DbContext _db;
 
-    public HomeController(Formule1DbContext db)
+    public ResultController(Formule1DbContext db)
     {
         _db = db;
     }
