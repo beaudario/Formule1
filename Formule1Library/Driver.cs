@@ -31,6 +31,6 @@ namespace Formule1Library
         
         public Country? Country { get; set; }
         
-        public IEnumerable<Result> Races { get; set; } = Enumerable.Empty<Result>();
+        public ICollection<Result>? Races { get; set; }
     }
 }

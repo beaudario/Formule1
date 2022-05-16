@@ -22,6 +22,6 @@ namespace Formule1Library
         
         public Country? Country { get; set; }
         
-        public IEnumerable<Result> Results { get; set; } = Enumerable.Empty<Result>();
+        public ICollection<Result>? Results { get; set; }
     }
 }

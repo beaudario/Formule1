@@ -21,10 +21,10 @@ namespace Formule1Library
         [Display(Name = "Tijd")]
         public string Time { get; set; } = string.Empty;
         
-        public Driver Driver { get; set; }
-        public Grandprix Grandprix { get; set; }
-        public Circuit Circuit { get; set; }
-        public Team Team { get; set; }
+        public Driver? Driver { get; set; }
+        public Grandprix? Grandprix { get; set; }
+        public Circuit? Circuit { get; set; }
+        public Team? Team { get; set; }
 
 
     }

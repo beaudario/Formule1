@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<Formule1Library.Driver>
-
 @{
     ViewData["Title"] = "Coureurs";
 }
@@ -12,15 +11,15 @@
     <div class="form-actions no-color">
         <p>
             Zoek per naam: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
-            <input type="submit" value="Zoek" class="btn btn-default" /> |
+            <input type="submit" value="Zoek" class="btn btn-default" style="white-space: normal; background-color:lightsalmon;" /> 
             <a asp-action="Index">Terug naar lijst</a>
         </p>
     </div>
 </form>
+           <tr>
+             <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">A/Z</a>
+            </tr>
         <tr>
-           <th>
-             <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.Name)</a>
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
@@ -28,7 +27,7 @@
                 @Html.DisplayNameFor(model => model.Birthdate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Country)
+                @Html.DisplayNameFor(model => model.Country.CountryName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Gender)
@@ -45,13 +44,13 @@
                 @Html.DisplayFor(modelItem => item.Birthdate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Country)
+                @Html.DisplayFor(modelItem => item.Country.CountryName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Gender)
             </td>
             <td>
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> 
+                <a class="nav-link text-dark" asp-area="" asp-action="Details" asp-route-id="@item.ID">Details</a>
             </td>
         </tr>
 }

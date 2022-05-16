@@ -30,8 +30,8 @@ namespace Formule1Library
         [Display(Name = "Vlag")]
         public string? FlagUrl { get; set; } = string.Empty;
         
-        public IEnumerable<Driver> Drivers { get; set; } = Enumerable.Empty<Driver>();
-        public IEnumerable<Team> Teams { get; set; } = Enumerable.Empty<Team>();
-        public IEnumerable<Circuit> Circuits { get; set; } = Enumerable.Empty<Circuit>();
+        public ICollection<Driver>? Drivers { get; set; } 
+        public ICollection<Team>? Teams { get; set; } 
+        public ICollection<Circuit>? Circuits { get; set; }
     }
 }

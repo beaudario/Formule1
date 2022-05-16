@@ -39,7 +39,9 @@ namespace Formule1WebApplication.Controllers
                     drivers = drivers.OrderBy(d => d.Name);
                     break;
             }
-            return View(await drivers.AsNoTracking().ToListAsync());
+            return _context.Drivers != null ?
+                View(await drivers.AsNoTracking().ToListAsync()) :
+            Problem("Entity set 'ApplicationDbContext.Drivers'  is null.");
         }
 
         // GET: Drivers/Details/5
@@ -63,6 +65,7 @@ namespace Formule1WebApplication.Controllers
         // GET: Drivers/Create
         public IActionResult Create()
         {
+            ViewBag.Country = new SelectList(_context.Countries.OrderBy(c => c.CountryName), "CountryCode", "CountryName");
             return View();
         }
 
@@ -71,8 +74,9 @@ namespace Formule1WebApplication.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Name,Birthdate,Wiki,Gender,ImageUrl")] Driver driver)
+        public async Task<IActionResult> Create([Bind("ID,Name,Birthdate,Wiki,Gender,ImageUrl,Country")] Driver driver, string Country)
         {
+            driver.Country = _context.Countries.Find(Country);
             if (ModelState.IsValid)
             {
                 _context.Add(driver);
@@ -90,11 +94,13 @@ namespace Formule1WebApplication.Controllers
                 return NotFound();
             }
 
-            var driver = await _context.Drivers.FindAsync(id);
+            var driver = await _context.Drivers.Include(d => d.Country).FirstAsync(d => d.ID == id);
             if (driver == null)
             {
                 return NotFound();
             }
+            ViewBag.Country = new SelectList(_context.Countries.OrderBy(c => c.CountryName), "CountryCode", "CountryName"
+                , driver.Country == null ? "" : driver.Country.CountryCode);
             return View(driver);
         }
 
@@ -103,7 +109,7 @@ namespace Formule1WebApplication.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Birthdate,Wiki,Gender,ImageUrl")] Driver driver)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Birthdate,Wiki,Gender,ImageUrl,Country")] Driver driver, string Country)
         {
             if (id != driver.ID)
             {
@@ -114,6 +120,7 @@ namespace Formule1WebApplication.Controllers
             {
                 try
                 {
+                    driver.Country = _context.Countries.Find(Country);
                     _context.Update(driver);
                     await _context.SaveChangesAsync();
                 }
