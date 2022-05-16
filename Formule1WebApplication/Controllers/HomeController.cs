@@ -1,21 +1,38 @@
 ﻿using System.Diagnostics;
+using Formule1Library.Data;
 using Microsoft.AspNetCore.Mvc;
 using Formule1WebApplication.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Formule1WebApplication.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    private readonly Formule1DbContext _db;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(Formule1DbContext db)
     {
-        _logger = logger;
+        _db = db;
     }
-
-    public IActionResult Index()
+    
+    public async Task<IActionResult> Index()
     {
-        return View();
+        return View(await _db.Results.ToListAsync());
+    }
+    
+    [Route("details/{id:int}")]
+    public async Task<IActionResult> Details(int id)
+    {
+        return View(await _db.Results
+            .Where(r => r.Season == id)
+            .Include(r => r.Driver)
+            .Include(r => r.Driver.Country)
+            .Include(r => r.Team)
+            .Include(r => r.Team.Country)
+            .Include(r => r.Circuit)
+            .Include(r => r.Circuit.Country)
+            .Include(r => r.Grandprix)
+            .ToListAsync());
     }
 
     public IActionResult Privacy()
