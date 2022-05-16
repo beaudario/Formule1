@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Formule1Lib;
-using Formule1Lib.Data;
+using Formule1Library;
+using Formule1Library.Data;
 
 namespace Formule1WebApplication.Controllers
 {
@@ -20,11 +20,39 @@ namespace Formule1WebApplication.Controllers
         }
 
         // GET: Teams
-        public async Task<IActionResult> Index()
+        // public async Task<IActionResult> Index()
+        //{
+        //       return _context.Teams != null ? 
+        //                   View(await _context.Teams.ToListAsync()) :
+        //                  Problem("Entity set 'Formule1DbContext.Teams'  is null.");
+        // }
+
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
-              return _context.Teams != null ? 
-                          View(await _context.Teams.ToListAsync()) :
-                          Problem("Entity set 'Formule1DbContext.Teams'  is null.");
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewData["CurrentFilter"] = searchString;
+            var Teams = from s in _context.Teams
+                           select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                Teams = Teams.Where(s => s.Name.Contains(searchString)
+                                       || s.Wiki.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    Teams = Teams.OrderByDescending(s => s.Name);
+                    break;
+                case "Date":
+                    Teams = Teams.OrderBy(s => s.Country);
+                    break;
+                case "date_desc":
+                    Teams = Teams.OrderByDescending(s => s.Wiki);
+                    break;
+
+            }
+            return View(await Teams.AsNoTracking().ToListAsync());
         }
 
         // GET: Teams/Details/5

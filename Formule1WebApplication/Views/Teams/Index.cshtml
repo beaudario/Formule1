@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Formule1Lib.Team>
+﻿@model IEnumerable<Formule1Library.Team>
 
 @{
     ViewData["Title"] = "Index";
@@ -7,12 +7,29 @@
 <h1>F1 Constructeurs</h1>
 
 <style>
-    
+    .tbody {
+            background-color: #04AA6D; /* Green */
+    }
+
+
 </style>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
+
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Zoek via naam: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-default" /> |
+            <a asp-action="Index">Terug naar de lijst</a>
+        </p>
+    </div>
+</form>
+
+<tr>
+             <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">A/Z</a>
+             </tr>
+
 <table class="table">
     <thead>
         <tr>
@@ -20,7 +37,7 @@
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+                @Html.DisplayNameFor(model => model.Country)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Wiki)
@@ -35,15 +52,15 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Description)
+                @Html.DisplayFor(modelItem => item.Country)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Wiki)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Edit" asp-route-id="@item.ID"></a> |
                 <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.ID"></a>
             </td>
         </tr>
 }
@@ -51,5 +68,12 @@
 </table>
 
 <body>
-    <div><<h1>test</h1></div>
+
+
+        <div class="row" style="transform:translate(71px,10px);">
+        <div class="column">
+            <h3>Gewone klasse</h3>
+           
+            <a href="~/Images/ferrari-f1-wallpaper.jpg" style="width:10%">  <img src="~/Images/ferrari-f1-wallpaper.jpg" alt="Snow" style="width: 100%; transform: translate(-104px, -52px) "></a>
+        </div>
 </body>
