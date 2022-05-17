@@ -43,7 +43,8 @@
                 @Html.DisplayFor(modelItem => item.WikiUrl)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Country)
+                @Html.DisplayFor(modelItem => item.Country.Name)
+                <img width="35%" src="@item.Country.FlagUrl">
             </td>
         </tr>
 }

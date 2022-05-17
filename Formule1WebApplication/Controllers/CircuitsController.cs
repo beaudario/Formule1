@@ -23,7 +23,7 @@ namespace Formule1WebApplication.Controllers
         public async Task<IActionResult> Index()
         {
               return _context.Circuits != null ? 
-                          View(await _context.Circuits.ToListAsync()) :
+                          View(await _context.Circuits.Include(c => c.Country).ToListAsync()) :
                           Problem("Entity set 'Formule1DbContext.Circuits'  is null.");
         }
 
