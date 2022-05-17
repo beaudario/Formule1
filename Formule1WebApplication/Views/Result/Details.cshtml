@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Formule1Library.Result>
+
+@foreach (var result in Model)
+{
+    <div class="card w-50 m-2" style="background-color: #e1e1e1">
+        <div class="card-body">
+            <h5 class="card-title">
+                <a class="link-dark" asp-controller="" asp-action="" asp-route-id="@result.GrandprixID">@result.Grandprix.Name</a> &nbsp
+                <img width="7%" src="@result.Circuit.Country.FlagUrl"/>
+            </h5>
+            <p class="card-text">Datum: @Convert.ToDateTime(result.Date).ToShortDateString()</p>
+            <p class="card-text">Circuit: <a class="link-dark" asp-controller="" asp-action="" asp-route-id="@result.CircuitID">@result.Circuit.Name</a></p>
+            <p class="card-text">
+                Winnende coureur: <a class="link-dark" asp-controller="" asp-action="" asp-route-id="@result.DriverID">@result.Driver.Fullname</a> &nbsp
+                <img width="5%" src="@result.Driver.Country.FlagUrl"/>
+            </p>
+            <p class="card-text">
+                Winnend constructeursteam: <a class="link-dark" asp-controller="" asp-action="" asp-route-id="@result.TeamID">@result.Team.Name</a> &nbsp
+                <img width="5%" src="@result.Team.Country.FlagUrl"/>
+            </p>
+            <p class="card-text">Rondes: @result.Rounds</p>
+            <p class="card-text">Raceduur: @result.Time (moet nog veranderd worden in snelste tijd)</p>
+        </div>
+    </div>
+}
