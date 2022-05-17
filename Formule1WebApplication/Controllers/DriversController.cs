@@ -24,19 +24,22 @@ namespace Formule1WebApplication.Controllers
         {
             ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             var drivers = from d in _context.Drivers
+                .Include(d => d.Country)
+                .Include(t => t.Teams)
+                .Include(r => r.Results)
                           select d;
             if (!String.IsNullOrEmpty(searchString))
             {
-                drivers = drivers.Where(d => d.Name.Contains(searchString));
+                drivers = drivers.Where(d => d.Fullname.Contains(searchString));
                                        
             }
             switch (sortOrder)
             {
                 case "name_desc":
-                    drivers = drivers.OrderByDescending(d => d.Name);
+                    drivers = drivers.OrderByDescending(d => d.Fullname);
                     break;
                 default:
-                    drivers = drivers.OrderBy(d => d.Name);
+                    drivers = drivers.OrderBy(d => d.Fullname);
                     break;
             }
             return _context.Drivers != null ?
@@ -53,6 +56,9 @@ namespace Formule1WebApplication.Controllers
             }
 
             var driver = await _context.Drivers
+                .Include(d => d.Country)
+                .Include(t => t.Teams)
+                .Include(r => r.Results)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (driver == null)
             {
@@ -65,7 +71,7 @@ namespace Formule1WebApplication.Controllers
         // GET: Drivers/Create
         public IActionResult Create()
         {
-            ViewBag.Country = new SelectList(_context.Countries.OrderBy(c => c.CountryName), "CountryCode", "CountryName");
+            ViewBag.Country = new SelectList(_context.Countries.OrderBy(c => c.Name), "CountryCode", "CountryName");
             return View();
         }
 
@@ -99,8 +105,8 @@ namespace Formule1WebApplication.Controllers
             {
                 return NotFound();
             }
-            ViewBag.Country = new SelectList(_context.Countries.OrderBy(c => c.CountryName), "CountryCode", "CountryName"
-                , driver.Country == null ? "" : driver.Country.CountryCode);
+            ViewBag.Country = new SelectList(_context.Countries.OrderBy(c => c.Name), "CountryCode", "CountryName"
+                , driver.Country == null ? "" : driver.Country.ID);
             return View(driver);
         }
 

@@ -22,8 +22,6 @@ namespace Formule1WebApplication.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-<<<<<<< HEAD
-=======
             modelBuilder.Entity("DriverTeam", b =>
                 {
                     b.Property<int>("DriversID")
@@ -39,7 +37,6 @@ namespace Formule1WebApplication.Migrations
                     b.ToTable("DriverTeam");
                 });
 
->>>>>>> master
             modelBuilder.Entity("Formule1Library.Circuit", b =>
                 {
                     b.Property<int>("ID")
@@ -48,16 +45,8 @@ namespace Formule1WebApplication.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
-<<<<<<< HEAD
-                    b.Property<string>("CountryCode")
-                        .HasColumnType("char(2)");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-=======
                     b.Property<string>("CountryID")
                         .HasColumnType("nvarchar(2)");
->>>>>>> master
 
                     b.Property<double?>("Latitude")
                         .HasColumnType("float");
@@ -70,45 +59,19 @@ namespace Formule1WebApplication.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-<<<<<<< HEAD
-                    b.Property<string>("Wiki")
-=======
                     b.Property<string>("WikiUrl")
->>>>>>> master
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
                     b.HasKey("ID");
 
-<<<<<<< HEAD
-                    b.HasIndex("CountryCode");
-=======
                     b.HasIndex("CountryID");
->>>>>>> master
 
                     b.ToTable("Circuits");
                 });
 
             modelBuilder.Entity("Formule1Library.Country", b =>
                 {
-<<<<<<< HEAD
-                    b.Property<string>("CountryCode")
-                        .HasMaxLength(2)
-                        .HasColumnType("char(2)");
-
-                    b.Property<string>("Code3")
-                        .HasMaxLength(3)
-                        .HasColumnType("char(3)");
-
-                    b.Property<string>("CountryName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("CountryNumber")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
-=======
                     b.Property<string>("ID")
                         .HasMaxLength(2)
                         .HasColumnType("nvarchar(2)");
@@ -116,22 +79,17 @@ namespace Formule1WebApplication.Migrations
                     b.Property<string>("Code3")
                         .HasMaxLength(3)
                         .HasColumnType("nvarchar(3)");
->>>>>>> master
 
                     b.Property<string>("FlagUrl")
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
-<<<<<<< HEAD
-                    b.HasKey("CountryCode");
-=======
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("ID");
->>>>>>> master
 
                     b.ToTable("Countries");
                 });
@@ -147,24 +105,6 @@ namespace Formule1WebApplication.Migrations
                     b.Property<DateTime?>("Birthdate")
                         .HasColumnType("datetime2");
 
-<<<<<<< HEAD
-                    b.Property<string>("CountryCode")
-                        .HasColumnType("char(2)");
-
-                    b.Property<string>("Gender")
-                        .HasMaxLength(1)
-                        .HasColumnType("char(1)");
-
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Wiki")
-=======
                     b.Property<string>("CountryID")
                         .HasColumnType("nvarchar(2)");
 
@@ -182,17 +122,12 @@ namespace Formule1WebApplication.Migrations
                         .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("WikiUrl")
->>>>>>> master
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
                     b.HasKey("ID");
 
-<<<<<<< HEAD
-                    b.HasIndex("CountryCode");
-=======
                     b.HasIndex("CountryID");
->>>>>>> master
 
                     b.ToTable("Drivers");
                 });
@@ -205,13 +140,8 @@ namespace Formule1WebApplication.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
-<<<<<<< HEAD
-                    b.Property<string>("CountryCode")
-                        .HasColumnType("char(2)");
-=======
                     b.Property<string>("CountryID")
                         .HasColumnType("nvarchar(2)");
->>>>>>> master
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -221,21 +151,13 @@ namespace Formule1WebApplication.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-<<<<<<< HEAD
-                    b.Property<string>("Wiki")
-=======
                     b.Property<string>("WikiUrl")
->>>>>>> master
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
                     b.HasKey("ID");
 
-<<<<<<< HEAD
-                    b.HasIndex("CountryCode");
-=======
                     b.HasIndex("CountryID");
->>>>>>> master
 
                     b.ToTable("Grandprixes");
                 });
@@ -251,11 +173,7 @@ namespace Formule1WebApplication.Migrations
                     b.Property<int?>("CircuitID")
                         .HasColumnType("int");
 
-<<<<<<< HEAD
-                    b.Property<DateTime?>("Date")
-=======
                     b.Property<DateTime>("Date")
->>>>>>> master
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("DriverID")
@@ -264,13 +182,6 @@ namespace Formule1WebApplication.Migrations
                     b.Property<int?>("GrandprixID")
                         .HasColumnType("int");
 
-<<<<<<< HEAD
-                    b.Property<byte>("Racenumber")
-                        .HasColumnType("tinyint");
-
-                    b.Property<byte>("Rounds")
-                        .HasColumnType("tinyint");
-=======
                     b.Property<int>("Racenumber")
                         .HasColumnType("int");
 
@@ -279,7 +190,6 @@ namespace Formule1WebApplication.Migrations
 
                     b.Property<int>("Season")
                         .HasColumnType("int");
->>>>>>> master
 
                     b.Property<int?>("TeamID")
                         .HasColumnType("int");
@@ -288,12 +198,6 @@ namespace Formule1WebApplication.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-<<<<<<< HEAD
-                    b.Property<int>("Year")
-                        .HasColumnType("int");
-
-=======
->>>>>>> master
                     b.HasKey("ID");
 
                     b.HasIndex("CircuitID");
@@ -315,13 +219,8 @@ namespace Formule1WebApplication.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
-<<<<<<< HEAD
-                    b.Property<string>("CountryCode")
-                        .HasColumnType("char(2)");
-=======
                     b.Property<string>("CountryID")
                         .HasColumnType("nvarchar(2)");
->>>>>>> master
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -331,27 +230,17 @@ namespace Formule1WebApplication.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-<<<<<<< HEAD
-                    b.Property<string>("Wiki")
-=======
                     b.Property<string>("WikiUrl")
->>>>>>> master
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
                     b.HasKey("ID");
 
-<<<<<<< HEAD
-                    b.HasIndex("CountryCode");
-=======
                     b.HasIndex("CountryID");
->>>>>>> master
 
                     b.ToTable("Teams");
                 });
 
-<<<<<<< HEAD
-=======
             modelBuilder.Entity("DriverTeam", b =>
                 {
                     b.HasOne("Formule1Library.Driver", null)
@@ -367,16 +256,11 @@ namespace Formule1WebApplication.Migrations
                         .IsRequired();
                 });
 
->>>>>>> master
             modelBuilder.Entity("Formule1Library.Circuit", b =>
                 {
                     b.HasOne("Formule1Library.Country", "Country")
                         .WithMany("Circuits")
-<<<<<<< HEAD
-                        .HasForeignKey("CountryCode");
-=======
                         .HasForeignKey("CountryID");
->>>>>>> master
 
                     b.Navigation("Country");
                 });
@@ -385,11 +269,7 @@ namespace Formule1WebApplication.Migrations
                 {
                     b.HasOne("Formule1Library.Country", "Country")
                         .WithMany("Drivers")
-<<<<<<< HEAD
-                        .HasForeignKey("CountryCode");
-=======
                         .HasForeignKey("CountryID");
->>>>>>> master
 
                     b.Navigation("Country");
                 });
@@ -397,13 +277,8 @@ namespace Formule1WebApplication.Migrations
             modelBuilder.Entity("Formule1Library.Grandprix", b =>
                 {
                     b.HasOne("Formule1Library.Country", "Country")
-<<<<<<< HEAD
-                        .WithMany()
-                        .HasForeignKey("CountryCode");
-=======
                         .WithMany("Grandprixes")
                         .HasForeignKey("CountryID");
->>>>>>> master
 
                     b.Navigation("Country");
                 });
@@ -411,19 +286,11 @@ namespace Formule1WebApplication.Migrations
             modelBuilder.Entity("Formule1Library.Result", b =>
                 {
                     b.HasOne("Formule1Library.Circuit", "Circuit")
-<<<<<<< HEAD
-                        .WithMany("Races")
-                        .HasForeignKey("CircuitID");
-
-                    b.HasOne("Formule1Library.Driver", "Driver")
-                        .WithMany("Races")
-=======
                         .WithMany("Results")
                         .HasForeignKey("CircuitID");
 
                     b.HasOne("Formule1Library.Driver", "Driver")
                         .WithMany("Results")
->>>>>>> master
                         .HasForeignKey("DriverID");
 
                     b.HasOne("Formule1Library.Grandprix", "Grandprix")
@@ -431,11 +298,7 @@ namespace Formule1WebApplication.Migrations
                         .HasForeignKey("GrandprixID");
 
                     b.HasOne("Formule1Library.Team", "Team")
-<<<<<<< HEAD
-                        .WithMany("Races")
-=======
                         .WithMany("Results")
->>>>>>> master
                         .HasForeignKey("TeamID");
 
                     b.Navigation("Circuit");
@@ -451,22 +314,14 @@ namespace Formule1WebApplication.Migrations
                 {
                     b.HasOne("Formule1Library.Country", "Country")
                         .WithMany("Teams")
-<<<<<<< HEAD
-                        .HasForeignKey("CountryCode");
-=======
                         .HasForeignKey("CountryID");
->>>>>>> master
 
                     b.Navigation("Country");
                 });
 
             modelBuilder.Entity("Formule1Library.Circuit", b =>
                 {
-<<<<<<< HEAD
-                    b.Navigation("Races");
-=======
                     b.Navigation("Results");
->>>>>>> master
                 });
 
             modelBuilder.Entity("Formule1Library.Country", b =>
@@ -475,21 +330,14 @@ namespace Formule1WebApplication.Migrations
 
                     b.Navigation("Drivers");
 
-<<<<<<< HEAD
-=======
                     b.Navigation("Grandprixes");
 
->>>>>>> master
                     b.Navigation("Teams");
                 });
 
             modelBuilder.Entity("Formule1Library.Driver", b =>
                 {
-<<<<<<< HEAD
-                    b.Navigation("Races");
-=======
                     b.Navigation("Results");
->>>>>>> master
                 });
 
             modelBuilder.Entity("Formule1Library.Grandprix", b =>
@@ -499,11 +347,7 @@ namespace Formule1WebApplication.Migrations
 
             modelBuilder.Entity("Formule1Library.Team", b =>
                 {
-<<<<<<< HEAD
-                    b.Navigation("Races");
-=======
                     b.Navigation("Results");
->>>>>>> master
                 });
 #pragma warning restore 612, 618
         }

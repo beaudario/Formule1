@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Formule1WebApplication.Migrations
 {
     [DbContext(typeof(Formule1DbContext))]
-    [Migration("20220515173232_AddedManyToManyRelationToDriverAndTeam")]
-    partial class AddedManyToManyRelationToDriverAndTeam
+    [Migration("20220516114957_Database aangemaakt")]
+    partial class Databaseaangemaakt
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Formule1Library.Data;
 
 namespace Formule1Library
 {
@@ -22,13 +21,6 @@ namespace Formule1Library
 
         [DataType(DataType.Url)]
         [StringLength(250, ErrorMessage = "Maximumlengte voor {0} is {1} tekens")]
-<<<<<<< HEAD
-        public string? Wiki { get; set; } = string.Empty;
-        
-        public Country? Country { get; set; }
-        
-        public ICollection<Result>? Results { get; set; }
-=======
         public string? WikiUrl { get; set; }
 
         #endregion
@@ -41,6 +33,5 @@ namespace Formule1Library
         public ICollection<Result> Results { get; set; }
 
         #endregion
->>>>>>> master
     }
 }

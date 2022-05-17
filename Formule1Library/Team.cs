@@ -27,15 +27,9 @@ namespace Formule1Library
         public Country Country { get; set; }
 
         public ICollection<Result> Results { get; set; }
-        
-<<<<<<< HEAD
-        public Country? Country { get; set; }
-        
-        public ICollection<Result>? Races { get; set; }
-=======
+       
         public ICollection<Driver> Drivers { get; set; }
 
         #endregion
->>>>>>> master
     }
 }

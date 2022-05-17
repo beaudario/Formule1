@@ -18,6 +18,7 @@ namespace Formule1Library
         [Display(Name = "Breedtegraad")] public double? Longitude { get; set; }
 
         [DataType(DataType.Url)]
+
         [StringLength(250, ErrorMessage = "Maximum lengte van {0} is {1} tekens")]
         public string? WikiUrl { get; set; }
 

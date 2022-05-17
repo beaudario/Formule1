@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Formule1Library.Data;
 
 namespace Formule1Library
 {
@@ -41,14 +40,8 @@ namespace Formule1Library
 
         public ICollection<Result> Results { get; set; }
         
-<<<<<<< HEAD
-        public Country? Country { get; set; }
-        
-        public ICollection<Result>? Races { get; set; }
-=======
         public ICollection<Team> Teams { get; set; }
 
         #endregion
->>>>>>> master
     }
 }

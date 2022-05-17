@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Formule1WebApplication.Migrations
 {
-    public partial class newmodelsdatabase : Migration
+    public partial class Databaseaangemaakt : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,6 +14,7 @@ namespace Formule1WebApplication.Migrations
                 columns: table => new
                 {
                     ID = table.Column<string>(type: "nvarchar(2)", maxLength: 2, nullable: false),
+                    Code3 = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: true),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     FlagUrl = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true)
                 },
@@ -28,7 +29,7 @@ namespace Formule1WebApplication.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Latitude = table.Column<double>(type: "float", nullable: true),
                     Longitude = table.Column<double>(type: "float", nullable: true),
                     WikiUrl = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
@@ -52,8 +53,9 @@ namespace Formule1WebApplication.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Fullname = table.Column<string>(type: "nvarchar(75)", maxLength: 75, nullable: false),
                     Birthdate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Gender = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    Gender = table.Column<string>(type: "nvarchar(1)", maxLength: 1, nullable: true),
                     ImageUrl = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    WikiUrl = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
                     CountryID = table.Column<string>(type: "nvarchar(2)", nullable: true)
                 },
                 constraints: table =>
@@ -74,6 +76,7 @@ namespace Formule1WebApplication.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    WikiUrl = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
                     CountryID = table.Column<string>(type: "nvarchar(2)", nullable: true)
                 },
                 constraints: table =>
@@ -92,7 +95,7 @@ namespace Formule1WebApplication.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     WikiUrl = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
                     CountryID = table.Column<string>(type: "nvarchar(2)", nullable: true)
@@ -105,6 +108,30 @@ namespace Formule1WebApplication.Migrations
                         column: x => x.CountryID,
                         principalTable: "Countries",
                         principalColumn: "ID");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DriverTeam",
+                columns: table => new
+                {
+                    DriversID = table.Column<int>(type: "int", nullable: false),
+                    TeamsID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DriverTeam", x => new { x.DriversID, x.TeamsID });
+                    table.ForeignKey(
+                        name: "FK_DriverTeam_Drivers_DriversID",
+                        column: x => x.DriversID,
+                        principalTable: "Drivers",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DriverTeam_Teams_TeamsID",
+                        column: x => x.TeamsID,
+                        principalTable: "Teams",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -159,6 +186,11 @@ namespace Formule1WebApplication.Migrations
                 column: "CountryID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_DriverTeam_TeamsID",
+                table: "DriverTeam",
+                column: "TeamsID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Grandprixes_CountryID",
                 table: "Grandprixes",
                 column: "CountryID");
@@ -191,6 +223,9 @@ namespace Formule1WebApplication.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "DriverTeam");
+
             migrationBuilder.DropTable(
                 name: "Results");
 
