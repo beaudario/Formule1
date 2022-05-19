@@ -22,8 +22,18 @@ public class ResultController : Controller
     }
     
     [Route("details/{id:int}")]
-    public async Task<IActionResult> Details(int id)
+    public async Task<IActionResult> Details(int? id)
     {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        if (id > DateTime.Now.Year || id < 1950)
+        {
+            return NotFound();
+        }
+        
         return View(await _db.Results
             .Where(r => r.Season == id)
             .Include(r => r.Driver)
@@ -33,7 +43,8 @@ public class ResultController : Controller
             .Include(r => r.Circuit)
             .Include(r => r.Circuit.Country)
             .Include(r => r.Grandprix)
-            .ToListAsync());
+            .ToListAsync()
+        );
     }
 
     public async Task<IActionResult> Create(Result result)
