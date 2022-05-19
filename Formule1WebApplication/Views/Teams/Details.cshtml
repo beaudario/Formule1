@@ -6,6 +6,7 @@
 
 <h1>Details team</h1>
 
+
 <div>
     <h4>Team</h4>
     <hr />
@@ -23,14 +24,14 @@
             @Html.DisplayFor(model => model.Country)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Wiki)
+            @Html.DisplayNameFor(model => model.WikiUrl)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Wiki)
+            @Html.DisplayFor(model => model.WikiUrl)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.ID"></a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.ID"></a> 
+    <a asp-action="Index">Terug naar constructeurs</a>
 </div>

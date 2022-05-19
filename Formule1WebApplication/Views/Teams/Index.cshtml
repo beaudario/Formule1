@@ -20,7 +20,7 @@
     <div class="form-actions no-color">
         <p>
             Zoek via naam: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
-            <input type="submit" value="Search" class="btn btn-default" /> |
+            <input type="submit" value="Zoeken" class="btn btn-default" /> |
             <a asp-action="Index">Terug naar de lijst</a>
         </p>
     </div>
@@ -40,7 +40,7 @@
                 @Html.DisplayNameFor(model => model.Country)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Wiki)
+                @Html.DisplayNameFor(model => model.WikiUrl)
             </th>
             <th></th>
         </tr>
@@ -52,14 +52,15 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Country)
+                @Html.DisplayFor(modelItem => item.Country.Name)
+                @*<img src="@item.Country.FlagUrl">*@
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Wiki)
+                @Html.DisplayFor(modelItem => item.WikiUrl)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ID"></a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Edit" asp-route-id="@item.ID"></a> 
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> 
                 <a asp-action="Delete" asp-route-id="@item.ID"></a>
             </td>
         </tr>

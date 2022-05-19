@@ -37,7 +37,7 @@ namespace Formule1WebApplication.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
                 Teams = Teams.Where(s => s.Name.Contains(searchString)
-                                       || s.Wiki.Contains(searchString));
+                                       || s.WikiUrl.Contains(searchString));
             }
             switch (sortOrder)
             {
@@ -48,11 +48,11 @@ namespace Formule1WebApplication.Controllers
                     Teams = Teams.OrderBy(s => s.Country);
                     break;
                 case "date_desc":
-                    Teams = Teams.OrderByDescending(s => s.Wiki);
+                    Teams = Teams.OrderByDescending(s => s.WikiUrl);
                     break;
 
             }
-            return View(await Teams.AsNoTracking().ToListAsync());
+            return View(await Teams.AsNoTracking().Include(t => t.Country).ToListAsync());
         }
 
         // GET: Teams/Details/5

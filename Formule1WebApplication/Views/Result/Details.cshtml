@@ -15,7 +15,7 @@
                 <img width="5%" src="@result.Driver.Country.FlagUrl"/>
             </p>
             <p class="card-text">
-                Winnend constructeursteam: <a class="link-dark" asp-controller="" asp-action="" asp-route-id="@result.TeamID">@result.Team.Name</a> &nbsp
+                Winnend constructeursteam: <a class="link-dark" asp-controller="Teams" asp-action="Details" asp-route-id="@result.TeamID">@result.Team.Name</a> &nbsp
                 <img width="5%" src="@result.Team.Country.FlagUrl"/>
             </p>
             <p class="card-text">Rondes: @result.Rounds</p>
