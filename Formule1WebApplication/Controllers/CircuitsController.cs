@@ -27,6 +27,13 @@ namespace Formule1WebApplication.Controllers
                           Problem("Entity set 'Formule1DbContext.Circuits'  is null.");
         }
 
+        public async Task<IActionResult> TopCoureur(int id)
+        {
+            var result = _context.Results.Include(x => x.Driver).Where(x => x.CircuitID == id);
+
+                return View(result);
+        }
+
         // GET: Circuits/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -159,5 +166,7 @@ namespace Formule1WebApplication.Controllers
         {
           return (_context.Circuits?.Any(e => e.ID == id)).GetValueOrDefault();
         }
+
+        
     }
 }

@@ -7,54 +7,29 @@
 <h1>Circuits</h1>
 
 <div class="row"> 
-    <div class="col-md-11"> </div>
-        <a class="btn btn-primary col-md-1" asp-action="Create" asp-controller="Circuits">Nieuw
+    <div class="col-md-10"> </div>
+        <a class="btn btn-primary col-md-2 asp-action="Create" asp-controller="Circuits">Nieuwe circuit
 </a>
  <div class="col-md-10"> </div>
       <a class="btn btn-primary col-md-2" asp-action="" asp-controller="">Top 3 circuits
 </a>  
+ <div class="col-md-10"> </div>
+      <a class="btn btn-primary col-md-2" asp-action="" asp-controller="">Top 3 constructeurs
+</a>  
 </div>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Latitude)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Longitude)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WikiUrl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Country)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Latitude)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Longitude)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.WikiUrl)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Country.Name)
-                <img width="35%" src="@item.Country.FlagUrl">
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<form method="post">
+    @foreach (var circuit in Model)
+    {
+        <div class="card w-50 m-2" style="background-color: #e1e1e1">
+            <div class="card-body">
+                <h5 class="card-title"><a class="link-dark" asp-action="Details" asp-route-id="@circuit.ID">@circuit.Name</a></h5>
+                <img width="5%" src="@circuit.Country.FlagUrl"/>
+                <p class="card-text">Naam: @circuit.Name</p>
+                <p class="card-text">Latitude: @circuit.Latitude</p>
+                <p class="card-text">Longitude: @circuit.Longitude</p>
+                <a href="@circuit.WikiUrl"class="card-text">@circuit.WikiUrl</a>
+                <p class="card-text">Land: @circuit.Country.Name</p>
+            </div>
+        </div>
+    }
+</form>
