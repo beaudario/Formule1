@@ -3,21 +3,23 @@
 
     <div class="card w-50 m-2" style="background-color: #e1e1e1">
         <div class="card-body">
+            <h1  class="card-text">
+                <a class="link-dark" asp-controller="Drivers" asp-action="Details" asp-route-id="@Model.ID">@Model.Fullname</a> &nbsp
+                <img width="7%" src="@Model.Country.FlagUrl"/>
+            </h1>
+            <img width="25%" src="@Model.ImageUrl"/>
             <p class="card-text">Geboortedatum: @Convert.ToDateTime(Model.Birthdate).ToShortDateString()</p>
-            <p class="card-text">
-                 Coureur: <a class="link-dark" asp-controller="Drivers" asp-action="Details" asp-route-id="@Model.ID">@Model.Fullname</a> &nbsp
-                <img width="5%" src="@Model.Country.FlagUrl"/>
-            </p>
             @foreach(var team in Model.Teams)
             {
                 <p class="card-text">
                 Constructeursteam: <a class="link-dark" asp-controller="" asp-action="" asp-route-id="@team.ID">@team.Name</a> &nbsp
-@*                <img width="5%" src="@team.Country.FlagUrl"/>*@
+               @*<img width="5%" src="@team.Country.FlagUrl"/>*@
             </p>
             }
             <p class="card-text">Overwinningen @Model.Results.Count</p>
+            <a href="@Model.WikiUrl">Wikipedia</a>
             <div>
-                <a asp-action="Index">Terug naar lijst</a>
+                <a asp-action="Index">Terug naar Coureurs</a>
             </div>
         </div>
     </div>

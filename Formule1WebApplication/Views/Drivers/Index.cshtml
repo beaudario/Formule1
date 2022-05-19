@@ -16,43 +16,14 @@
         </p>
     </div>
 </form>
-           <tr>
-             <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">A/Z</a>
-            </tr>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Fullname)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Birthdate)
-            </th>
-            <th>
-                Land
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Gender)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {   
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fullname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Birthdate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Country.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Gender)
-            </td>
-            <td>
-                <a class="nav-link text-dark" asp-area="" asp-action="Details" asp-route-id="@item.ID">Details</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<form method="post">
+    @foreach (var driver in Model)
+    {
+        <div class="card w-50 m-2" style="background-color: #e1e1e1">
+            <div class="card-body">
+                <h5 class="card-title"><a class="link-dark" asp-action="Details" asp-route-id="@driver.ID">@driver.Fullname</a></h5>
+                <img width="5%" src="@driver.Country.FlagUrl"/>
+            </div>
+        </div>
+    }
+</form>
