@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using Formule1Library;
 using Formule1Library.Data;
 using Microsoft.AspNetCore.Mvc;
 using Formule1WebApplication.Models;
@@ -35,7 +36,7 @@ public class ResultController : Controller
             .ToListAsync());
     }
 
-    public IActionResult Privacy()
+    public async Task<IActionResult> Create(Result result)
     {
         return View();
     }
