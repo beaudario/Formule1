@@ -27,4 +27,6 @@ public class DriverController : Controller
             .Include(d => d.Results)
             .FirstAsync(d => d.ID == id));
     }
+    
+    
 }

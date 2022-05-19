@@ -15,6 +15,7 @@
             @foreach (var team in Model.Teams)
             {
                 <li>@team.Name</li>
+                              <img src="@team.Country.FlagUrl"/>
             }
         </ul>
     </div>
