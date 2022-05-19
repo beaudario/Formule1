@@ -17,6 +17,9 @@
             </p>
             }
             <p class="card-text">Overwinningen @Model.Results.Count</p>
+            <p class="card-text">Eerste Race: @Model.Results.First().Date</p>
+            <p class="card-text">Laatste Race: @Model.Results.Last().Date</p>
+            <p class="card-text">Overwinningen @Model.Results.Count</p>
             <a href="@Model.WikiUrl">Wikipedia</a>
             <div>
                 <a asp-action="Index">Terug naar Coureurs</a>
