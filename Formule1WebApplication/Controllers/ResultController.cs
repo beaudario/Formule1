@@ -47,9 +47,19 @@ public class ResultController : Controller
         );
     }
 
+    [HttpPost]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(Result result)
     {
-        return View();
+        if (ModelState.IsValid)
+        {
+            _db.Add(result);
+            await _db.SaveChangesAsync();
+
+            return RedirectToAction("Details", result.Season);
+        }
+        
+        return View(result);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
