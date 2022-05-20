@@ -21,7 +21,7 @@ public class ResultController : Controller
         return View(await _db.Results.ToListAsync());
     }
     
-    [Route("details/{id:int}")]
+    [Route("Result/Details/{id:int}")]
     public async Task<IActionResult> Details(int? id)
     {
         if (id == null)
@@ -47,19 +47,25 @@ public class ResultController : Controller
         );
     }
 
+    public async Task<IActionResult> Create()
+    {
+        ViewBag.Drivers = await _db.Drivers.ToListAsync();
+        ViewBag.Teams = await _db.Teams.ToListAsync();
+        ViewBag.Circuits = await _db.Circuits.ToListAsync();
+        ViewBag.Grandprixes = await _db.Grandprixes.ToListAsync();
+        
+        return View();
+    }
+
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(Result result)
     {
-        if (ModelState.IsValid)
-        {
-            _db.Add(result);
-            await _db.SaveChangesAsync();
-
-            return RedirectToAction("Details", result.Season);
-        }
+        if (!ModelState.IsValid) return View(result);
         
-        return View(result);
+        await _db.AddAsync(result);
+        await _db.SaveChangesAsync();
+        return RedirectToAction("Index");
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

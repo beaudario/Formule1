@@ -11,14 +11,16 @@ public class Result
 
     [Display(Name = "Seizoen")] [Required] public int Season { get; set; }
 
-    [Display(Name = "#")] [Required] public int Racenumber { get; set; }
+    [Display(Name = "Racenummer")]
+    [Required]
+    public int Racenumber { get; set; }
 
-    [Display(Name = "Rondes")]
+    [Display(Name = "Datum")]
     [Required]
     [DataType(DataType.Date)]
     public DateTime Date { get; set; }
 
-    public int Rounds { get; set; }
+    [Display(Name = "Rondes")] public int Rounds { get; set; }
 
     [Display(Name = "Tijd")] public string Time { get; set; }
 
@@ -26,17 +28,17 @@ public class Result
 
     #region Relation properties
 
-    public int? DriverID { get; set; }
-    public Driver Driver { get; set; }
+    [Display(Name = "Coureur")] public int? DriverID { get; set; }
+    public Driver? Driver { get; set; }
 
-    public int? CircuitID { get; set; }
-    public Circuit Circuit { get; set; }
+    [Display(Name = "Circuit")] public int? CircuitID { get; set; }
+    public Circuit? Circuit { get; set; }
 
-    public int? TeamID { get; set; }
-    public Team Team { get; set; }
+    [Display(Name = "Constructeursteam")] public int? TeamID { get; set; }
+    public Team? Team { get; set; }
 
-    public int? GrandprixID { get; set; }
-    public Grandprix Grandprix { get; set; }
+    [Display(Name = "Grandprix")] public int? GrandprixID { get; set; }
+    public Grandprix? Grandprix { get; set; }
 
     #endregion
 }

@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<Formule1Library.Result>
 
+<a class="btn btn-primary" asp-controller="Result" asp-action="Create">Voeg nieuw resultaat toe</a>
+
 <form method="post">
     @foreach (var season in Model.GroupBy(s => s.Season, (key, items) => new {Year = key, RaceCount = items.Count()}).OrderByDescending(s => s.Year))
     {

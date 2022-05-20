@@ -1,1 +1,41 @@
-﻿
+﻿@model Formule1Library.Result
+
+<form method="post">
+    <div class="form-group">
+        <label for="season" asp-for="Season"></label>
+        <input class="form-control w-50" id="season" placeholder="Voer jaar in" asp-for="Season">
+    </div>
+    <div class="form-group">
+        <label for="racenumber" asp-for="Racenumber"></label>
+        <input class="form-control w-50" id="racenumber" placeholder="Voer racenummer in" asp-for="Racenumber">
+    </div>
+    <div class="form-group">
+        <label for="date" asp-for="Date"></label>
+        <input type="date" class="form-control w-50" id="date" asp-for="Date">
+    </div>
+    <div class="form-group">
+        <label for="rounds" asp-for="Rounds"></label>
+        <input class="form-control w-50" id="rounds" placeholder="Voer rondes in" asp-for="Rounds">
+    </div>
+    <div class="form-group">
+        <label for="time" asp-for="Time"></label>
+        <input class="form-control w-50" id="time" placeholder="Voer tijd in als 1:30.123" asp-for="Time">
+    </div>
+    <div class="form-group">
+        <label for="driver" asp-for="DriverID"></label>
+        <select class="form-control" id="driver" asp-items="@(new SelectList(ViewBag.Drivers, "ID", "Fullname"))" asp-for="DriverID"></select>
+    </div>
+    <div class="form-group">
+        <label for="team" asp-for="TeamID"></label>
+        <select class="form-control" id="driver" asp-items="@(new SelectList(ViewBag.Teams, "ID", "Name"))" asp-for="TeamID"></select>
+    </div>
+    <div class="form-group">
+        <label for="circuit" asp-for="CircuitID"></label>
+        <select class="form-control" id="circuit" asp-items="@(new SelectList(ViewBag.Circuits, "ID", "Name"))" asp-for="CircuitID"></select>
+    </div>
+    <div class="form-group">
+        <label for="grandprix" asp-for="GrandprixID"></label>
+        <select class="form-control" id="grandprix" asp-items="@(new SelectList(ViewBag.Grandprixes, "ID", "Name"))" asp-for="GrandprixID"></select>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
