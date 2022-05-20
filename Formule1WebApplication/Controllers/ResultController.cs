@@ -37,11 +37,11 @@ public class ResultController : Controller
         return View(await _db.Results
             .Where(r => r.Season == id)
             .Include(r => r.Driver)
-            .Include(r => r.Driver.Country)
+                .ThenInclude(r => r.Country)
             .Include(r => r.Team)
-            .Include(r => r.Team.Country)
+                .ThenInclude(r => r.Country)
             .Include(r => r.Circuit)
-            .Include(r => r.Circuit.Country)
+                .ThenInclude(r => r.Country)
             .Include(r => r.Grandprix)
             .ToListAsync()
         );
