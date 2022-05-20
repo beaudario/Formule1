@@ -1,18 +1,26 @@
-﻿@model TModel
+﻿@model Formule1Library.Result
 
-@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title>title</title>
-</head>
-<body>
-<div>
-      
+<div class="card w-50 m-2" style="background-color: #e1e1e1">
+    <div class="card-body">
+        <h5 class="card-title">
+            @Model.Grandprix.Name &nbsp
+            <img width="7%" src="@Model.Circuit.Country.FlagUrl"/>
+        </h5>
+        <p class="card-text">Datum: @Convert.ToDateTime(Model.Date).ToShortDateString()</p>
+        <p class="card-text">Circuit: <a class="link-dark" asp-controller="" asp-action="" asp-route-id="@Model.CircuitID">@Model.Circuit.Name</a></p>
+        <p class="card-text">
+            Winnende coureur: <a class="link-dark" asp-controller="" asp-action="" asp-route-id="@Model.DriverID">@Model.Driver.Fullname</a> &nbsp
+            <img width="5%" src="@Model.Driver.Country.FlagUrl"/>
+        </p>
+        <p class="card-text">
+            Winnend constructeursteam: <a class="link-dark" asp-controller="" asp-action="" asp-route-id="@Model.TeamID">@Model.Team.Name</a> &nbsp
+            <img width="5%" src="@Model.Team.Country.FlagUrl"/>
+        </p>
+        <p class="card-text">Rondes: @Model.Rounds</p>
+        <p class="card-text">Raceduur: @Model.Time (moet nog veranderd worden in snelste tijd)</p>
+    </div>
 </div>
-</body>
-</html>
+
+<h3>Weet je zeker dat je dit wilt verwijderen?</h3>
+<a class="btn btn-primary" asp-controller="Result" asp-action="DeleteConfirmed" asp-route-id="@Model.ID">Ja</a>
+<a class="btn btn-danger" asp-controller="Result" asp-action="Details" asp-route-id="@Model.Season">Nee</a>

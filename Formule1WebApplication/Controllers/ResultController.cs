@@ -15,12 +15,12 @@ public class ResultController : Controller
     {
         _db = db;
     }
-    
+
     public async Task<IActionResult> Index()
     {
         return View(await _db.Results.ToListAsync());
     }
-    
+
     [Route("Result/Details/{id:int}")]
     public async Task<IActionResult> Details(int? id)
     {
@@ -33,7 +33,7 @@ public class ResultController : Controller
         {
             return NotFound();
         }
-        
+
         return View(await _db.Results
             .Where(r => r.Season == id)
             .Include(r => r.Driver)
@@ -53,7 +53,7 @@ public class ResultController : Controller
         ViewBag.Teams = await _db.Teams.ToListAsync();
         ViewBag.Circuits = await _db.Circuits.ToListAsync();
         ViewBag.Grandprixes = await _db.Grandprixes.ToListAsync();
-        
+
         return View();
     }
 
@@ -62,7 +62,7 @@ public class ResultController : Controller
     public async Task<IActionResult> Create(Result result)
     {
         if (!ModelState.IsValid) return View(result);
-        
+
         await _db.AddAsync(result);
         await _db.SaveChangesAsync();
         return RedirectToAction("Index");
@@ -75,15 +75,43 @@ public class ResultController : Controller
             return NotFound();
         }
 
+        var result = await _db.Results.Include(r => r.Driver)
+            .Include(r => r.Driver.Country)
+            .Include(r => r.Team)
+            .Include(r => r.Team.Country)
+            .Include(r => r.Circuit)
+            .Include(r => r.Circuit.Country)
+            .Include(r => r.Grandprix)
+            .FirstOrDefaultAsync(r => r.ID == id);
+
+        if (result == null)
+        {
+            return NotFound();
+        }
+
+        return View(result);
+    }
+
+    public async Task<IActionResult> DeleteConfirmed(int? id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
         var result = await _db.Results.FirstOrDefaultAsync(r => r.ID == id);
 
         if (result == null)
         {
             return NotFound();
         }
-        
-        return View(result);
+
+        _db.Results.Remove(result);
+        await _db.SaveChangesAsync();
+
+        return RedirectToAction("Index");
     }
+    
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
