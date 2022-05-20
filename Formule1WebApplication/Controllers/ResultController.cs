@@ -68,6 +68,23 @@ public class ResultController : Controller
         return RedirectToAction("Index");
     }
 
+    public async Task<IActionResult> Delete(int? id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        var result = await _db.Results.FirstOrDefaultAsync(r => r.ID == id);
+
+        if (result == null)
+        {
+            return NotFound();
+        }
+        
+        return View(result);
+    }
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
