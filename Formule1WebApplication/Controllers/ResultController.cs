@@ -119,6 +119,7 @@ public class ResultController : Controller
         return RedirectToAction("Index");
     }
 
+    [Route("Result/Update/{id:int}")]
     public async Task<IActionResult> Update(int? id)
     {
         if (id == null)
@@ -146,7 +147,7 @@ public class ResultController : Controller
         return View(result);
     }
 
-    public async Task<IActionResult> Update(int? id, Result updatedResult)
+    public async Task<IActionResult> UpdateConfirmed(int? id, Result updatedResult)
     {
         if (id == null)
         {
@@ -162,10 +163,19 @@ public class ResultController : Controller
 
         if (ModelState.IsValid)
         {
-            
+            oldResult.Season = updatedResult.Season;
+            oldResult.Racenumber = updatedResult.Racenumber;
+            oldResult.Rounds = updatedResult.Rounds;
+            oldResult.Date = updatedResult.Date;
+            oldResult.Time = updatedResult.Time;
+            oldResult.CircuitID = updatedResult.CircuitID;
+            oldResult.DriverID = updatedResult.DriverID;
+            oldResult.GrandprixID = updatedResult.GrandprixID;
+            oldResult.TeamID = updatedResult.TeamID;
+            await _db.SaveChangesAsync();
         }
         
-        return View(updatedResult);
+        return RedirectToAction("Index");
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
