@@ -5,8 +5,9 @@ namespace Formule1WebApplication.Models
 {
     public class TopViewModel
     {
-        public Driver Coureur { get; set; }
+        public string Naam { get; set; }
 
         public int Overwinningen { get; set; }
+
     }
 }

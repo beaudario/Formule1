@@ -1,5 +1,6 @@
 ﻿@model Formule1Library.Circuit
 
+
 @{
     ViewData["Title"] = "Details";
 }
@@ -10,36 +11,84 @@
     <h4>Circuit</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Country.FlagUrl)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Country.FlagUrl)
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Name)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Name)
         </dd>
-       @*<dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Country.Name)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Country.Name)
+        </dd>
+        @*<dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Description)
-        </dd>*@ 
-        <dt class = "col-sm-2">
+            </dd>*@
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Latitude)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Latitude)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Longitude)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Longitude)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.WikiUrl)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.WikiUrl)
         </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">Races </dt>
+        <dd class="col-sm-10">@ViewBag.NumberOfRaces</dd>
+        <dt class="col-sm-2">Winnaars </dt>
+        <dd class="col-sm-10">@ViewBag.NumberOfWin </dd>
+        <table>
+            <dt> Top drie beste coureurs: </dt>
+            @foreach (var winner in (List<TopViewModel>)ViewBag.WinnersC)
+            {
+                <tr>
+            <dd class="col-sm-2">
+                        @winner.Naam
+            </dd>
+            <dd class="col-sm-10">
+                        @winner.Overwinningen
+            </dd>
+            </tr>
+            }
+        </table>
+    </dl>
+    <dl class="row">
+        <table>
+            <dt> Top drie beste teams: </dt>
+            @foreach (var winner in (List<TopViewModel>)ViewBag.WinnersT)
+            {
+                <tr>
+            <dd class="col-sm-2">
+                        @winner.Naam
+            </dd>
+            <dd class="col-sm-10">
+                        @winner.Overwinningen
+            </dd>
+            </tr>
+            }
+        </table>
     </dl>
 </div>
 <div>

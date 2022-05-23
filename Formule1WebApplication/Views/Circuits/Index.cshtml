@@ -6,16 +6,18 @@
 
 <h1>Circuits</h1>
 
-<div class="row"> 
+<div class="row">
     <div class="col-md-10"> </div>
-        <a class="btn btn-primary col-md-2 asp-action="Create" asp-controller="Circuits">Nieuwe circuit
-</a>
- <div class="col-md-10"> </div>
-      <a class="btn btn-primary col-md-2" asp-action="" asp-controller="">Top 3 circuits
-</a>  
- <div class="col-md-10"> </div>
-      <a class="btn btn-primary col-md-2" asp-action="" asp-controller="">Top 3 constructeurs
-</a>  
+    <a class="btn btn-primary col-md-2 asp-action="Create" asp-controller="Circuits">
+        
+        Nieuwe circuit
+        </a>
+
+    <div class="col-md-10"> </div>
+    <a class="btn btn-primary col-md-2" asp-action="" asp-controller="">
+        
+        Top 3 constructeurs
+        </a>
 </div>
 <form method="post">
     @foreach (var circuit in Model)
@@ -23,12 +25,13 @@
         <div class="card w-50 m-2" style="background-color: #e1e1e1">
             <div class="card-body">
                 <h5 class="card-title"><a class="link-dark" asp-action="Details" asp-route-id="@circuit.ID">@circuit.Name</a></h5>
-                <img width="5%" src="@circuit.Country.FlagUrl"/>
+                <img width="5%" src="@circuit.Country.FlagUrl"  />
                 <p class="card-text">Naam: @circuit.Name</p>
                 <p class="card-text">Latitude: @circuit.Latitude</p>
                 <p class="card-text">Longitude: @circuit.Longitude</p>
-                <a href="@circuit.WikiUrl"class="card-text">@circuit.WikiUrl</a>
+                <a href="@circuit.WikiUrl"  class="card-text">@circuit.WikiUrl</a>
                 <p class="card-text">Land: @circuit.Country.Name</p>
+                <div class="col-md-10"> </div>
             </div>
         </div>
     }

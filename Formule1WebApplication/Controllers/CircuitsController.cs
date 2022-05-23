@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Formule1Library;
 using Formule1Library.Data;
+using Formule1WebApplication.Models;
 
 namespace Formule1WebApplication.Controllers
 {
@@ -22,16 +23,16 @@ namespace Formule1WebApplication.Controllers
         // GET: Circuits
         public async Task<IActionResult> Index()
         {
-              return _context.Circuits != null ? 
-                          View(await _context.Circuits.Include(c => c.Country).ToListAsync()) :
-                          Problem("Entity set 'Formule1DbContext.Circuits'  is null.");
+            return _context.Circuits != null ?
+                        View(await _context.Circuits.Include(c => c.Country).ToListAsync()) :
+                        Problem("Entity set 'Formule1DbContext.Circuits'  is null.");
         }
 
         public async Task<IActionResult> TopCoureur(int id)
         {
-            var result = _context.Results.Include(x => x.Driver).Where(x => x.CircuitID == id);
+            var result = _context.Results.Include(x => x.Driver).Where(x => x.CircuitID == id).OrderBy(x => x.Driver.Results);
 
-                return View(result);
+            return View();
         }
 
         // GET: Circuits/Details/5
@@ -42,12 +43,38 @@ namespace Formule1WebApplication.Controllers
                 return NotFound();
             }
 
-            var circuit = await _context.Circuits
+            var circuit = await _context.Circuits.Include(c => c.Results).ThenInclude(x => x.Driver).ThenInclude(d => d.Results).Include(g => g.Results).
+                                                  ThenInclude(g => g.Team).ThenInclude(g => g.Results)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (circuit == null)
             {
                 return NotFound();
             }
+            var winnersCoureur = circuit.Results.GroupBy(r => r.Driver);
+            ViewBag.NumberOfWin = winnersCoureur.Count();
+            ViewBag.NumberOfRaces = circuit.Results.Count();
+            List<TopViewModel> topWinners = new List<TopViewModel>();
+            foreach (var winner in winnersCoureur)
+            {
+                var topVM = new TopViewModel();
+                topVM.Naam = winner.Key.Fullname;
+                topVM.Overwinningen = winner.Key.Results.Where(r => r.CircuitID == id).Count();
+                topWinners.Add(topVM);
+            }
+            ViewBag.WinnersC = topWinners.OrderByDescending(t => t.Overwinningen).Take(3).ToList();
+
+            var winnersTeams = circuit.Results.GroupBy(r => r.Team);
+            List<TopViewModel> topTeams = new List<TopViewModel>();
+            foreach (var winner in winnersTeams)
+            {
+                var topVM = new TopViewModel();
+                topVM.Naam = winner.Key.Name;
+                topVM.Overwinningen = winner.Key.Results.Where(r => r.CircuitID == id).Count();
+                topWinners.Add(topVM);
+            }
+            ViewBag.WinnersT = topWinners.OrderByDescending(t => t.Overwinningen).Take(3).ToList();
+
+
 
             return View(circuit);
         }
@@ -157,16 +184,16 @@ namespace Formule1WebApplication.Controllers
             {
                 _context.Circuits.Remove(circuit);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CircuitExists(int id)
         {
-          return (_context.Circuits?.Any(e => e.ID == id)).GetValueOrDefault();
+            return (_context.Circuits?.Any(e => e.ID == id)).GetValueOrDefault();
         }
 
-        
+
     }
 }
