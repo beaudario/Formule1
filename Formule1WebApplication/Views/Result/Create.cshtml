@@ -23,19 +23,19 @@
     </div>
     <div class="form-group">
         <label for="driver" asp-for="DriverID"></label>
-        <select class="form-control" id="driver" asp-items="@(new SelectList(ViewBag.Drivers, "ID", "Fullname"))" asp-for="DriverID"></select>
+        <select class="form-control w-50" id="driver" asp-items="@ViewBag.CreateDrivers" asp-for="DriverID"></select>
     </div>
     <div class="form-group">
         <label for="team" asp-for="TeamID"></label>
-        <select class="form-control" id="driver" asp-items="@(new SelectList(ViewBag.Teams, "ID", "Name"))" asp-for="TeamID"></select>
+        <select class="form-control w-50" id="driver" asp-items="@ViewBag.CreateTeams" asp-for="TeamID"></select>
     </div>
     <div class="form-group">
         <label for="circuit" asp-for="CircuitID"></label>
-        <select class="form-control" id="circuit" asp-items="@(new SelectList(ViewBag.Circuits, "ID", "Name"))" asp-for="CircuitID"></select>
+        <select class="form-control w-50" id="circuit" asp-items="@ViewBag.CreateCircuits" asp-for="CircuitID"></select>
     </div>
     <div class="form-group">
         <label for="grandprix" asp-for="GrandprixID"></label>
-        <select class="form-control" id="grandprix" asp-items="@(new SelectList(ViewBag.Grandprixes, "ID", "Name"))" asp-for="GrandprixID"></select>
+        <select class="form-control w-50" id="grandprix" asp-items="@ViewBag.CreateGrandprixes" asp-for="GrandprixID"></select>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

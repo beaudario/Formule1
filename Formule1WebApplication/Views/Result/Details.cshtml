@@ -5,6 +5,7 @@
     <div class="card w-50 m-2" style="background-color: #e1e1e1">
         <div class="card-body">
             <a class="btn btn-danger" asp-controller="Result" asp-action="Delete" asp-route-id="@result.ID">Verwijderen</a>
+            <a class="btn btn-info" asp-controller="Result" asp-action="Update" asp-route-id="@result.ID">Wijzigen</a>
             <h5 class="card-title">
                 <a class="link-dark" asp-controller="" asp-action="" asp-route-id="@result.GrandprixID">@result.Grandprix.Name</a> &nbsp
                 <img width="7%" src="@result.Circuit.Country.FlagUrl"/>
