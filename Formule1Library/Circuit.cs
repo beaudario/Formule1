@@ -13,10 +13,9 @@ namespace Formule1Library
         [Display(Name = "Naam")]
         [StringLength(50, ErrorMessage = "Maximum lengte van {0} is {1} tekens")]
         public string Name { get; set; }
-
         [Display(Name = "Lengtegraad")] public double? Latitude { get; set; }
 
-        [Display(Name = "Breedtegraad")] public double? Longitude { get; set; }
+        [Display(Name = "Breedtegraad")] public double? Longitude { get; set; } 
 
         [DataType(DataType.Url)]
         [StringLength(250, ErrorMessage = "Maximum lengte van {0} is {1} tekens")]
