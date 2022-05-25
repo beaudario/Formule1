@@ -63,7 +63,7 @@ namespace Formule1WebApplication.Controllers
                 return NotFound();
             }
 
-            var team = await _context.Teams
+            var team = await _context.Teams.Include(n => n.Results).ThenInclude(n => n.Driver).ThenInclude(n => n.Country).Include(n => n.Country)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (team == null)
             {
@@ -84,7 +84,7 @@ namespace Formule1WebApplication.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Name,Description,Wiki")] Team team)
+        public async Task<IActionResult> Create(Team team)
         {
             if (ModelState.IsValid)
             {

@@ -11,6 +11,18 @@
     <h4>Team</h4>
     <hr />
     <dl class="row">
+
+        <nsbp>
+        <dt class = "col-sm-2">
+                        @if(Model.Teamphoto != null)
+            {
+                <img width="100%" src="@Model.Teamphoto"/>
+            }
+        </dt>
+        <br />
+        </nsbp>
+     
+
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Name)
         </dt>
@@ -21,7 +33,11 @@
             @Html.DisplayNameFor(model => model.Country)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Country)
+            @Html.DisplayFor(model => model.Country.Name)
+            @if(Model.Country != null)
+            {
+                <img width="5%" src="@Model.Country.FlagUrl"/>
+            }
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.WikiUrl)
@@ -29,6 +45,21 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.WikiUrl)
         </dd>
+        <H10>Aantal overwinningen:</H10>
+        @foreach(var jaar in Model.Results.DistinctBy(n => n.Season).OrderByDescending(n => n.Season).Take(3))
+         {  
+        <div>@jaar.Season @jaar.Team.Results.Where(n => n.Season == jaar.Season).Count()</div>
+         }
+         <br />
+         <br />
+        
+         <H10>Coureurs:</H10>
+         @foreach(var coureurs in Model.Results.DistinctBy(n => n.DriverID).OrderByDescending(n => n.Driver.Fullname))
+         {  
+            <div> @coureurs.Driver.Fullname</div>
+         }
+            
+
     </dl>
 </div>
 <div>

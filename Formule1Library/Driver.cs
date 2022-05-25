@@ -13,7 +13,7 @@ namespace Formule1Library
         [Display(Name = "Volledige naam")]
         [Required]
         [StringLength(75)]
-        public string Fullname { get; set; }
+        public string? Fullname { get; set; }
 
         [Display(Name = "Geboortedatum")]
         [DataType(DataType.Date)]
@@ -37,11 +37,11 @@ namespace Formule1Library
         #region Relation properties
 
         public string? CountryID { get; set; }
-        public Country Country { get; set; }
+        public Country? Country { get; set; }
 
-        public ICollection<Result> Results { get; set; }
+        public IEnumerable<Result>? Results { get; set; }
         
-        public ICollection<Team> Teams { get; set; }
+        public IEnumerable<Team>? Teams { get; set; }
 
         #endregion
     }

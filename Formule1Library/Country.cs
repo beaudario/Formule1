@@ -10,7 +10,7 @@ namespace Formule1Library
         [Key]
         [RegularExpression("[A-Z]{2}", ErrorMessage = "Landcode moet bestaan uit 2 hoofdletters")]
         [StringLength(2)]
-        public string ID { get; set; }
+        public string? ID { get; set; }
 
         [RegularExpression("[A-Z]{3}", ErrorMessage = "Landcode moet bestaan uit 3 hoofdletters")]
         [StringLength(3)]
@@ -18,7 +18,7 @@ namespace Formule1Library
 
         [Required]
         [StringLength(100, ErrorMessage = "Maximumlengte voor {0} is {1} tekens")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [DataType(DataType.Url)]
         [StringLength(250, ErrorMessage = "Maximumlengte voor {0} is {1} tekens")]
@@ -28,13 +28,13 @@ namespace Formule1Library
 
         #region Relation properties
 
-        public ICollection<Circuit> Circuits { get; set; }
+        public ICollection<Circuit>? Circuits { get; set; }
 
-        public ICollection<Team> Teams { get; set; }
+        public ICollection<Team>? Teams { get; set; }
 
-        public ICollection<Driver> Drivers { get; set; }
+        public ICollection<Driver>? Drivers { get; set; }
 
-        public ICollection<Grandprix> Grandprixes { get; set; }
+        public ICollection<Grandprix>? Grandprixes { get; set; }
 
         #endregion
     }

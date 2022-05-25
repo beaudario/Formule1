@@ -11,7 +11,7 @@ namespace Formule1Library
         [Required]
         [Display(Name = "Naam")]
         [StringLength(50, ErrorMessage = "Maximum lengte van {0} is {1} tekens")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [Display(Name = "Lengtegraad")] public double? Latitude { get; set; }
 
@@ -26,9 +26,9 @@ namespace Formule1Library
         #region Relation properties
 
         public string? CountryID { get; set; }
-        public Country Country { get; set; }
+        public Country? Country { get; set; }
 
-        public ICollection<Result> Results { get; set; }
+        public IEnumerable<Result>? Results { get; set; }
 
         #endregion
     }

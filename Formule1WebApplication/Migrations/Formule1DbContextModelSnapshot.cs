@@ -173,7 +173,8 @@ namespace Formule1WebApplication.Migrations
                     b.Property<int?>("CircuitID")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime?>("Date")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("DriverID")
@@ -185,7 +186,7 @@ namespace Formule1WebApplication.Migrations
                     b.Property<int>("Racenumber")
                         .HasColumnType("int");
 
-                    b.Property<int>("Rounds")
+                    b.Property<int?>("Rounds")
                         .HasColumnType("int");
 
                     b.Property<int>("Season")
@@ -195,7 +196,6 @@ namespace Formule1WebApplication.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Time")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
@@ -229,6 +229,9 @@ namespace Formule1WebApplication.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("TeamPhoto")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("WikiUrl")
                         .HasMaxLength(250)
