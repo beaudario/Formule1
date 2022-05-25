@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Formule1Library;
 using Formule1Library.Data;
+using Formule1WebApplication.Models;
 
 namespace Formule1WebApplication.Controllers
 {
@@ -20,9 +21,22 @@ namespace Formule1WebApplication.Controllers
         }
 
         // GET: Drivers
-        public async Task<IActionResult> Index(string sortOrder, string searchString)
+        public async Task<IActionResult> Index(
+            string sortOrder,
+            string currentFilter,
+            string searchString,
+            int? pageNumber)
         {
+            ViewData["CurrentSort"] = sortOrder;
             ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
             var drivers = from d in _context.Drivers
                 .Include(d => d.Country)
                 .Include(t => t.Teams)
@@ -42,9 +56,8 @@ namespace Formule1WebApplication.Controllers
                     drivers = drivers.OrderBy(d => d.Fullname);
                     break;
             }
-            return _context.Drivers != null ?
-                View(await drivers.AsNoTracking().ToListAsync()) :
-            Problem("Entity set 'ApplicationDbContext.Drivers'  is null.");
+            int pageSize = 10;
+            return View(await PaginatedList<Driver>.CreateAsync(drivers.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         // GET: Drivers/Details/5
@@ -71,7 +84,8 @@ namespace Formule1WebApplication.Controllers
         // GET: Drivers/Create
         public IActionResult Create()
         {
-            ViewBag.Country = new SelectList(_context.Countries.OrderBy(c => c.Name), "CountryCode", "CountryName");
+            ViewData["TeamsID"] = new SelectList(_context.Teams, "ID", "Name");
+            ViewData["CountryID"] = new SelectList(_context.Countries, "ID", "Name");
             return View();
         }
 
@@ -80,7 +94,7 @@ namespace Formule1WebApplication.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Name,Birthdate,Wiki,Gender,ImageUrl,Country")] Driver driver, string Country)
+        public async Task<IActionResult> Create([Bind("ID,Fullname,Birthdate,WikiUrl,Gender,ImageUrl,Country")] Driver driver, string Country)
         {
             driver.Country = _context.Countries.Find(Country);
             if (ModelState.IsValid)
@@ -105,7 +119,7 @@ namespace Formule1WebApplication.Controllers
             {
                 return NotFound();
             }
-            ViewBag.Country = new SelectList(_context.Countries.OrderBy(c => c.Name), "CountryCode", "CountryName"
+            ViewData["CountryID"] = new SelectList(_context.Countries.OrderBy(c => c.Name), "ID", "Name"
                 , driver.Country == null ? "" : driver.Country.ID);
             return View(driver);
         }
@@ -115,7 +129,7 @@ namespace Formule1WebApplication.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Birthdate,Wiki,Gender,ImageUrl,Country")] Driver driver, string Country)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Fullname,Birthdate,WikiUrl,Gender,ImageUrl,Country")] Driver driver, string Country)
         {
             if (id != driver.ID)
             {

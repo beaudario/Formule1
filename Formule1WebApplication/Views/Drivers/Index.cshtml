@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Formule1Library.Driver>
+﻿@model PaginatedList<Formule1Library.Driver>
 @{
     ViewData["Title"] = "Coureurs";
 }
@@ -10,20 +10,43 @@
         <form asp-action="Index" method="get">
     <div class="form-actions no-color">
         <p>
-            Zoek per naam: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+            Zoek op naam: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
             <input type="submit" value="Zoek" class="btn btn-default" style="white-space: normal; background-color: lightblue;" /> 
             <a asp-action="Index">Terug naar lijst</a>
         </p>
     </div>
 </form>
+<a class="link-dark" asp-action="Create" asp-route-id="">Coureur Toevoegen</a>
 <form method="post">
     @foreach (var driver in Model)
     {
         <div class="card w-50 m-2" style="background-color: #e1e1e1">
             <div class="card-body">
-                <h5 class="card-title"><a class="link-dark" asp-action="Details" asp-route-id="@driver.ID">@driver.Fullname</a></h5>
                 <img width="5%" src="@driver.Country.FlagUrl"/>
+                <h5 class="card-title"><a class="link-dark" asp-action="Details" asp-route-id="@driver.ID">@driver.Fullname</a></h5>
+                <a class="link-dark" asp-action="Edit" asp-route-id="@driver.ID">Bewerken</a>
+                <br>
+                <a class="link-dark" asp-action="Delete" asp-route-id="@driver.ID">Verwijderen</a>
             </div>
         </div>
     }
 </form>
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @prevDisabled">
+    Vorige
+</a>
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @nextDisabled">
+    Volgende
+</a>

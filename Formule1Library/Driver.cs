@@ -36,11 +36,11 @@ namespace Formule1Library
         #region Relation properties
 
         public string? CountryID { get; set; }
-        public Country Country { get; set; }
+        public Country? Country { get; set; }
 
-        public ICollection<Result> Results { get; set; }
+        public ICollection<Result>? Results { get; set; }
         
-        public ICollection<Team> Teams { get; set; }
+        public ICollection<Team>? Teams { get; set; }
 
         #endregion
     }

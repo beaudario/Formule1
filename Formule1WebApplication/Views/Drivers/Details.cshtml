@@ -9,14 +9,19 @@
             </h1>
             <img width="25%" src="@Model.ImageUrl"/>
             <p class="card-text">Geboortedatum: @Convert.ToDateTime(Model.Birthdate).ToShortDateString()</p>
+            <p class="card-text">Land: @Model.Country.Name</p>
+            <p class="card-text">
+                Constructeursteam: 
+               @*<img width="5%" src="@Model.Teams.Country.FlagUrl"/>*@
+            </p>
             @foreach(var team in Model.Teams)
             {
-                <p class="card-text">
-                Constructeursteam: <a class="link-dark" asp-controller="" asp-action="" asp-route-id="@team.ID">@team.Name</a> &nbsp
-               @*<img width="5%" src="@team.Country.FlagUrl"/>*@
-            </p>
+            <ul> 
+            <li>
+               <a class="link-dark" asp-controller="Teams" asp-action="Details" asp-route-id="@team.ID">@team.Name</a>
+            </li>        
+            </ul>
             }
-            <p class="card-text">Overwinningen @Model.Results.Count</p>
             <p class="card-text">Eerste Race: @Model.Results.First().Date</p>
             <p class="card-text">Laatste Race: @Model.Results.Last().Date</p>
             <p class="card-text">Overwinningen @Model.Results.Count</p>
