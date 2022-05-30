@@ -5,17 +5,16 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Circuit Details</h1>
 
 <div>
-    <h4>Circuit</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Country.FlagUrl)
+             @Html.DisplayNameFor(model => model.Country.FlagUrl)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Country.FlagUrl)
+            <img width="5%" src="@Model.Country.FlagUrl"/>
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Name)
@@ -60,10 +59,10 @@
         <dt class="col-sm-2">Winnaars </dt>
         <dd class="col-sm-10">@ViewBag.NumberOfWin </dd>
         <table>
-            <dt> Top drie beste coureurs: </dt>
+        <dt> 3 beste coureurs: </dt>
             @foreach (var winner in (List<TopViewModel>)ViewBag.WinnersC)
             {
-                <tr>
+            <tr>
             <dd class="col-sm-2">
                         @winner.Naam
             </dd>
@@ -76,10 +75,10 @@
     </dl>
     <dl class="row">
         <table>
-            <dt> Top drie beste teams: </dt>
+        <dt> 3 beste teams: </dt>
             @foreach (var winner in (List<TopViewModel>)ViewBag.WinnersT)
             {
-                <tr>
+            <tr>
             <dd class="col-sm-2">
                         @winner.Naam
             </dd>

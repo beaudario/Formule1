@@ -22,7 +22,11 @@ namespace Formule1Library
 
         [DataType(DataType.Url)]
         [StringLength(250, ErrorMessage = "Maximumlengte voor {0} is {1} tekens")]
+
+        [Display(Name = "Vlag")]
         public string? FlagUrl { get; set; }
+        
+
 
         #endregion
 

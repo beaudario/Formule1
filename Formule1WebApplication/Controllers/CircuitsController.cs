@@ -44,7 +44,7 @@ namespace Formule1WebApplication.Controllers
             }
 
             var circuit = await _context.Circuits.Include(c => c.Results).ThenInclude(x => x.Driver).ThenInclude(d => d.Results).Include(g => g.Results).
-                                                  ThenInclude(g => g.Team).ThenInclude(g => g.Results)
+                                                  ThenInclude(g => g.Team).ThenInclude(g => g.Results).Include(x => x.Country)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (circuit == null)
             {
