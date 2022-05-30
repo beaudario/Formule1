@@ -116,7 +116,7 @@ namespace Formule1WebApplication.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Description,Wiki")] Team team)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Description,WikiUrl,CountryID")] Team team)
         {
             if (id != team.ID)
             {
