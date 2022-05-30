@@ -85,7 +85,7 @@ namespace Formule1WebApplication.Controllers
         public IActionResult Create()
         {
             ViewData["TeamsID"] = new SelectList(_context.Teams, "ID", "Name");
-            ViewData["CountryID"] = new SelectList(_context.Countries, "ID", "Name");
+            ViewData["CountryID"] = new SelectList(_context.Countries, "CountryID", "Name");
             return View();
         }
 
@@ -119,8 +119,21 @@ namespace Formule1WebApplication.Controllers
             {
                 return NotFound();
             }
-            ViewData["CountryID"] = new SelectList(_context.Countries.OrderBy(c => c.Name), "ID", "Name"
+
+
+            var selectList = new SelectList(_context.Countries.OrderBy(c => c.Name), "ID", "Name"
                 , driver.Country == null ? "" : driver.Country.ID);
+
+            foreach (var item in selectList)
+            {
+                if(item.Value == driver.CountryID)
+                {
+                    item.Selected = true;
+                    break;
+                }
+            }
+
+            ViewData["CountryID"] = selectList;
             return View(driver);
         }
 
@@ -129,18 +142,15 @@ namespace Formule1WebApplication.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Fullname,Birthdate,WikiUrl,Gender,ImageUrl,Country")] Driver driver, string Country)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Fullname,Birthdate,WikiUrl,Gender,ImageUrl,Country,CountryID")] Driver driver, string Country)
         {
             if (id != driver.ID)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            try
             {
-                try
-                {
-                    driver.Country = _context.Countries.Find(Country);
                     _context.Update(driver);
                     await _context.SaveChangesAsync();
                 }
@@ -156,8 +166,6 @@ namespace Formule1WebApplication.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            }
-            return View(driver);
         }
 
         // GET: Drivers/Delete/5
